@@ -1,0 +1,11 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Local configuration
+mcp_config.json
+.env
