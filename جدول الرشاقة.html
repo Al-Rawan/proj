@@ -73,17 +73,26 @@
         .footer strong { color: var(--accent-color); }
 
         .controls { display: flex; gap: 10px; margin-bottom: 15px; }
-        .btn { padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Cairo'; font-weight: 700; color: white; }
+        .btn { padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Cairo'; font-weight: 700; color: white; transition: 0.3s; }
+        .btn:hover { opacity: 0.8; transform: scale(1.05); }
+
+        /* Modal Styles */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { background: white; width: 95%; max-width: 1000px; height: 90vh; border-radius: 20px; display: flex; overflow: hidden; }
+        .modal-sidebar { width: 220px; background: #1e272e; color: white; padding: 20px; display: flex; flex-direction: column; gap: 10px; border-left: 1px solid #34495e; }
+        .modal-main { flex: 1; padding: 30px; overflow-y: auto; background: #f9f9f9; }
+        
+        .day-sel { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: none; color: #d1d8e0; text-align: right; border-radius: 8px; cursor: pointer; font-family: 'Cairo'; margin-bottom: 5px; }
+        .day-sel.active { background: var(--accent-color); color: white; font-weight: 700; }
+        
+        input[type="text"] { border: 1px solid #ddd; border-radius: 6px; font-family: 'Cairo'; padding: 8px; }
     </style>
 </head>
 <body>
 
     <div class="controls no-print">
-        <button class="btn" style="background:var(--gold-color)" onclick="openModal()">✏️ تعديل الجدول</button>
-        <button class="btn" style="background:#28a745" onclick="addNewDay()">➕ إضافة يوم جديد</button>
-        <button class="btn" style="background:var(--accent-color)" onclick="window.print()">🖨️ طباعة الجدول</button>
-        <button class="btn" style="background:#636e72" onclick="exportData()">💾 نسخة احتياطية</button>
-        <button class="btn" style="background:#dc3545" onclick="resetData()">🔄 إعادة ضبط</button>
+        <button class="btn" style="background:var(--accent-color)" onclick="openModal()">⚙️ الإعدادات والتعديل</button>
+        <button class="btn" style="background:#2ecc71" onclick="window.print()">🖨️ طباعة الجدول</button>
     </div>
 
     <div class="container" id="mainLayout">
@@ -101,26 +110,39 @@
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px; opacity: 0.5;">v1.4 - Smart Naming</div>
+            <div style="font-size: 9px; opacity: 0.5;">v1.6 - Clean UI</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
 
+    <!-- النافذة المنبثقة (Modal) -->
     <div class="modal" id="editModal">
-        <div style="background: white; width: 90%; max-width: 900px; height: 85vh; border-radius: 15px; display: flex; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-            <div style="width: 200px; background: #2c3e50; color: white; padding: 20px;">
-                <h3>الأيام</h3>
-                <div id="sideList"></div>
-                <button class="btn" style="background:#28a745; width:100%; margin-top:20px" onclick="addNewDay()">➕ إضافة يوم</button>
-                <button class="btn" style="width:100%; margin-top:10px; background:#e74c3c" onclick="closeModal()">إغلاق</button>
+        <div class="modal-content">
+            <div class="modal-sidebar">
+                <h3 style="margin-bottom: 15px; border-bottom: 1px solid #3d4e5f; padding-bottom: 10px;">إدارة الأيام</h3>
+                <div id="sideList" style="flex: 1; overflow-y: auto;"></div>
+                <button class="btn" style="background:#27ae60; margin-top: 10px;" onclick="addNewDay()">➕ إضافة يوم</button>
+                <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #3d4e5f; padding-top: 15px;">
+                    <button class="btn" style="background:#3498db; font-size: 11px;" onclick="exportData()">💾 نسخة احتياطية</button>
+                    <button class="btn" style="background:#e74c3c; font-size: 11px;" onclick="resetData()">🔄 إعادة ضبط</button>
+                    <button class="btn" style="background:#95a5a6;" onclick="closeModal()">إغلاق</button>
+                </div>
             </div>
-            <div style="flex: 1; padding: 25px; overflow-y: auto;">
-                <h2 id="editTitle">تعديل اليوم</h2>
+            <div class="modal-main">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2 id="editTitle" style="color: var(--accent-color);">تعديل اليوم</h2>
+                    <button class="btn" style="background:#e74c3c; padding: 5px 10px; font-size: 12px;" onclick="deleteDay()">🗑️ حذف هذا اليوم</button>
+                </div>
+                
+                <h4 style="margin-bottom: 10px;">🔥 قائمة الإحماء</h4>
                 <div id="warmEditor"></div>
-                <button class="btn" style="background:#f39c12; font-size:11px; margin:10px 0" onclick="addEx('warmup')">➕ إضافة إحماء</button>
+                <button class="btn" style="background:#f39c12; font-size:12px; margin:10px 0" onclick="addEx('warmup')">➕ إضافة إحماء</button>
+                
+                <h4 style="margin: 20px 0 10px;">💪 قائمة التمارين</h4>
                 <div id="mainEditor"></div>
-                <button class="btn" style="background:#2980b9; font-size:11px; margin:10px 0" onclick="addEx('main')">➕ إضافة تمرين</button>
-                <button class="btn" style="background:var(--accent-color); width:100%; margin-top:20px; padding:15px" onclick="saveAll()">💾 حفظ التغييرات</button>
+                <button class="btn" style="background:#2980b9; font-size:12px; margin:10px 0" onclick="addEx('main')">➕ إضافة تمرين</button>
+                
+                <button class="btn" style="background:var(--accent-color); width:100%; margin-top:30px; padding:15px; font-size: 18px;" onclick="saveAll()">✅ حفظ جميع التغييرات</button>
             </div>
         </div>
     </div>
@@ -172,7 +194,7 @@
             ]
         };
 
-        let data = JSON.parse(localStorage.getItem('gym_a_v1.4')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
+        let data = JSON.parse(localStorage.getItem('gym_a_v1.6')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
         let activeIdx = 0;
 
         function render() {
@@ -180,9 +202,7 @@
             const layout = document.getElementById('mainLayout');
             const count = data.days.length;
             container.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
-            if (count > 3) layout.classList.add('many-days');
-            else layout.classList.remove('many-days');
-
+            if (count > 3) layout.classList.add('many-days'); else layout.classList.remove('many-days');
             container.innerHTML = data.days.map(day => `
                 <div class="day-card">
                     <div class="day-title">${day.title}</div>
@@ -199,27 +219,15 @@
 
         function openModal() { document.getElementById('editModal').style.display='flex'; updateSide(); loadDay(activeIdx); }
         function closeModal() { document.getElementById('editModal').style.display='none'; }
-        function updateSide() { document.getElementById('sideList').innerHTML = data.days.map((d, i) => `<button class="day-sel ${i===activeIdx?'active':''}" style="width:100%; padding:10px; margin-bottom:5px; background:${i===activeIdx?'var(--gold-color)':'rgba(255,255,255,0.1)'}; color:white; border:none; text-align:right; cursor:pointer; border-radius:5px;" onclick="loadDay(${i})">${d.title}</button>`).join(''); }
+        function updateSide() { document.getElementById('sideList').innerHTML = data.days.map((d, i) => `<button class="day-sel ${i===activeIdx?'active':''}" onclick="loadDay(${i})">${d.title}</button>`).join(''); }
         function loadDay(i) { activeIdx = i; updateSide(); document.getElementById('editTitle').innerText = data.days[i].title; renderEx('warmup', 'warmEditor'); renderEx('main', 'mainEditor'); }
-        function renderEx(type, id) { document.getElementById(id).innerHTML = data.days[activeIdx][type].map((ex, i) => `<div style="display:flex; gap:10px; margin-bottom:5px"><input type="text" style="padding:8px; flex:1" value="${ex.name}" oninput="data.days[${activeIdx}].${type}[${i}].name=this.value"><input type="text" style="padding:8px; width:80px" value="${ex.sets}" oninput="data.days[${activeIdx}].${type}[${i}].sets=this.value"><button onclick="remEx('${type}',${i})">❌</button></div>`).join(''); }
+        function renderEx(type, id) { document.getElementById(id).innerHTML = data.days[activeIdx][type].map((ex, i) => `<div style="display:flex; gap:10px; margin-bottom:5px"><input type="text" style="padding:8px; flex:1" value="${ex.name}" oninput="data.days[${activeIdx}].${type}[${i}].name=this.value"><input type="text" style="padding:8px; width:80px" value="${ex.sets}" oninput="data.days[${activeIdx}].${type}[${i}].sets=this.value"><button style="background:none; border:none; cursor:pointer;" onclick="remEx('${type}',${i})">❌</button></div>`).join(''); }
         function addEx(t) { data.days[activeIdx][t].push({name:"جديد", sets:"3x10"}); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
         function remEx(t, i) { data.days[activeIdx][t].splice(i, 1); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
-        
-        function addNewDay() { 
-            const nextNum = data.days.length;
-            const ordinal = ORDINAL_AR[nextNum] || (nextNum + 1);
-            data.days.push({
-                title: `اليوم ${ordinal}`, 
-                warmup: [], 
-                main: [{name: "تمرين جديد", sets: "3x10"}]
-            }); 
-            activeIdx = data.days.length - 1; 
-            render(); 
-            if(document.getElementById('editModal').style.display==='flex') { updateSide(); loadDay(activeIdx); } 
-        }
-
-        function saveAll() { localStorage.setItem('gym_a_v1.4', JSON.stringify(data)); render(); closeModal(); }
-        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_a_v1.4'); location.reload(); } }
+        function addNewDay() { const nextNum = data.days.length; const ordinal = ORDINAL_AR[nextNum] || (nextNum + 1); data.days.push({title: `اليوم ${ordinal}`, warmup: [], main: [{name: "تمرين جديد", sets: "3x10"}]}); activeIdx = data.days.length - 1; updateSide(); loadDay(activeIdx); }
+        function deleteDay() { if(confirm("حذف هذا اليوم نهائياً؟")) { data.days.splice(activeIdx, 1); activeIdx = 0; if(data.days.length === 0) addNewDay(); updateSide(); loadDay(activeIdx); } }
+        function saveAll() { localStorage.setItem('gym_a_v1.6', JSON.stringify(data)); render(); closeModal(); }
+        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_a_v1.6'); location.reload(); } }
         function exportData() { const blob = new Blob([JSON.stringify(data)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = "gym_backup.json"; a.click(); }
         window.onload = render;
     </script>
