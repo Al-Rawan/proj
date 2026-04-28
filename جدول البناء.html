@@ -28,8 +28,8 @@
             background-color: var(--bg-color); border: 1px solid #ccc;
             padding: 10px; display: flex; flex-direction: column;
             position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            zoom: 0.9; /* الحفاظ على نفس توازن الملف الأصلي */
-            -webkit-print-color-adjust: exact !important; /* إجبار ظهور الألوان في الطباعة */
+            zoom: 0.9;
+            -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
         }
 
@@ -101,12 +101,11 @@
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px; opacity: 0.5;">v1.3 - Print Optimized</div>
+            <div style="font-size: 9px; opacity: 0.5;">v1.4 - Smart Naming</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
 
-    <!-- Modal (مخفي برمجياً) -->
     <div class="modal" id="editModal">
         <div style="background: white; width: 90%; max-width: 900px; height: 85vh; border-radius: 15px; display: flex; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
             <div style="width: 200px; background: #2c3e50; color: white; padding: 20px;">
@@ -127,6 +126,8 @@
     </div>
 
     <script>
+        const ORDINAL_AR = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر"];
+
         const ORIGINAL_DATA = {
             month: "الشهر الأول",
             days: [
@@ -134,48 +135,36 @@
                     title: "اليوم الأول (صدر + تراي)",
                     warmup: [{name: "جري", sets: "5د"}, {name: "شناو", sets: "3x10"}],
                     main: [
-                        {name: "بنج مستوي", sets: "12-10-8"},
-                        {name: "بنج اعلى همر", sets: "12-10-8"},
-                        {name: "بنج اعلى دمبلص", sets: "12-10-8"},
-                        {name: "بنج اسفل دمبلص", sets: "12-10-8"},
-                        {name: "فراشة جهاز", sets: "12-10-8"},
-                        {name: "تراي حبل", sets: "12-10-8"},
-                        {name: "تراي ضيق بالشيفت", sets: "12-10-8"},
-                        {name: "تراي جك بالدمبلص", sets: "12-10-8"}
+                        {name: "بنج مستوي", sets: "12-10-8"}, {name: "بنج اعلى همر", sets: "12-10-8"},
+                        {name: "بنج اعلى دمبلص", sets: "12-10-8"}, {name: "بنج اسفل دمبلص", sets: "12-10-8"},
+                        {name: "فراشة جهاز", sets: "12-10-8"}, {name: "تراي حبل", sets: "12-10-8"},
+                        {name: "تراي ضيق بالشيفت", sets: "12-10-8"}, {name: "تراي جك بالدمبلص", sets: "12-10-8"}
                     ]
                 },
                 {
                     title: "اليوم الثاني (ظهر + باي)",
                     warmup: [{name: "عقلة", sets: "3x10"}, {name: "سحب ارضي", sets: "3x10"}],
                     main: [
-                        {name: "سحب خلفي", sets: "12-10-8"},
-                        {name: "سحب امامي", sets: "12-10-8"},
-                        {name: "سحب همر", sets: "12-10-8"},
-                        {name: "سحب كيبل (T-bar)", sets: "12-10-8"},
-                        {name: "باي شيفت زكزاك", sets: "12-10-8"},
-                        {name: "باي دمبلص تبادل", sets: "12-10-8"},
-                        {name: "باي همر دمبلص", sets: "12-10-8"},
-                        {name: "باي ارتكاز دمبلص", sets: "12-10-8"}
+                        {name: "سحب خلفي", sets: "12-10-8"}, {name: "سحب امامي", sets: "12-10-8"},
+                        {name: "سحب همر", sets: "12-10-8"}, {name: "سحب كيبل (T-bar)", sets: "12-10-8"},
+                        {name: "باي شيفت زكزاك", sets: "12-10-8"}, {name: "باي دمبلص تبادل", sets: "12-10-8"},
+                        {name: "باي همر دمبلص", sets: "12-10-8"}, {name: "باي ارتكاز دمبلص", sets: "12-10-8"}
                     ]
                 },
                 {
                     title: "اليوم الثالث (أكتاف + أرجل)",
                     warmup: [{name: "دبني", sets: "3x15"}, {name: "جهاز ارجل", sets: "3x15"}],
                     main: [
-                        {name: "ضغط اكتاف دمبلص", sets: "12-10-8"},
-                        {name: "رفرفة جانبي", sets: "12-10-8"},
-                        {name: "رفرفة امامي", sets: "12-10-8"},
-                        {name: "ضغط اكتاف خلفي", sets: "12-10-8"},
-                        {name: "قرفصاء (Squat)", sets: "12-10-8"},
-                        {name: "ضغط ارجل جهاز", sets: "12-10-8"},
-                        {name: "معدة جذع", sets: "3x20"},
-                        {name: "رفع ساق", sets: "3x20"}
+                        {name: "ضغط اكتاف دمبلص", sets: "12-10-8"}, {name: "رفرفة جانبي", sets: "12-10-8"},
+                        {name: "رفرفة امامي", sets: "12-10-8"}, {name: "ضغط اكتاف خلفي", sets: "12-10-8"},
+                        {name: "قرفصاء (Squat)", sets: "12-10-8"}, {name: "ضغط ارجل جهاز", sets: "12-10-8"},
+                        {name: "معدة جذع", sets: "3x20"}, {name: "رفع ساق", sets: "3x20"}
                     ]
                 }
             ]
         };
 
-        let data = JSON.parse(localStorage.getItem('gym_b_v1.3')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
+        let data = JSON.parse(localStorage.getItem('gym_b_v1.4')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
         let activeIdx = 0;
 
         function render() {
@@ -207,9 +196,22 @@
         function renderEx(type, id) { document.getElementById(id).innerHTML = data.days[activeIdx][type].map((ex, i) => `<div style="display:flex; gap:10px; margin-bottom:5px"><input type="text" style="padding:8px; flex:1" value="${ex.name}" oninput="data.days[${activeIdx}].${type}[${i}].name=this.value"><input type="text" style="padding:8px; width:80px" value="${ex.sets}" oninput="data.days[${activeIdx}].${type}[${i}].sets=this.value"><button onclick="remEx('${type}',${i})">❌</button></div>`).join(''); }
         function addEx(t) { data.days[activeIdx][t].push({name:"جديد", sets:"12-10-8"}); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
         function remEx(t, i) { data.days[activeIdx][t].splice(i, 1); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
-        function addNewDay() { data.days.push({title:"يوم جديد", warmup:[], main:[{name:"تمرين جديد", sets:"12-10-8"}]}); activeIdx = data.days.length-1; render(); if(document.getElementById('editModal').style.display==='flex') { updateSide(); loadDay(activeIdx); } }
-        function saveAll() { localStorage.setItem('gym_b_v1.3', JSON.stringify(data)); render(); closeModal(); }
-        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_b_v1.3'); location.reload(); } }
+        
+        function addNewDay() { 
+            const nextNum = data.days.length;
+            const ordinal = ORDINAL_AR[nextNum] || (nextNum + 1);
+            data.days.push({
+                title: `اليوم ${ordinal}`, 
+                warmup: [], 
+                main: [{name: "تمرين جديد", sets: "12-10-8"}]
+            }); 
+            activeIdx = data.days.length - 1; 
+            render(); 
+            if(document.getElementById('editModal').style.display==='flex') { updateSide(); loadDay(activeIdx); } 
+        }
+
+        function saveAll() { localStorage.setItem('gym_b_v1.4', JSON.stringify(data)); render(); closeModal(); }
+        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_b_v1.4'); location.reload(); } }
         function exportData() { const blob = new Blob([JSON.stringify(data)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = "gym_backup.json"; a.click(); }
         window.onload = render;
     </script>

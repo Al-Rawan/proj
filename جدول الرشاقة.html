@@ -101,7 +101,7 @@
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px; opacity: 0.5;">v1.3 - Print Optimized</div>
+            <div style="font-size: 9px; opacity: 0.5;">v1.4 - Smart Naming</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
@@ -126,6 +126,8 @@
     </div>
 
     <script>
+        const ORDINAL_AR = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر"];
+
         const ORIGINAL_DATA = {
             month: "الشهر الأول",
             days: [
@@ -170,7 +172,7 @@
             ]
         };
 
-        let data = JSON.parse(localStorage.getItem('gym_a_v1.3')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
+        let data = JSON.parse(localStorage.getItem('gym_a_v1.4')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
         let activeIdx = 0;
 
         function render() {
@@ -202,9 +204,22 @@
         function renderEx(type, id) { document.getElementById(id).innerHTML = data.days[activeIdx][type].map((ex, i) => `<div style="display:flex; gap:10px; margin-bottom:5px"><input type="text" style="padding:8px; flex:1" value="${ex.name}" oninput="data.days[${activeIdx}].${type}[${i}].name=this.value"><input type="text" style="padding:8px; width:80px" value="${ex.sets}" oninput="data.days[${activeIdx}].${type}[${i}].sets=this.value"><button onclick="remEx('${type}',${i})">❌</button></div>`).join(''); }
         function addEx(t) { data.days[activeIdx][t].push({name:"جديد", sets:"3x10"}); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
         function remEx(t, i) { data.days[activeIdx][t].splice(i, 1); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
-        function addNewDay() { data.days.push({title:"يوم جديد", warmup:[], main:[{name:"تمرين جديد", sets:"3x10"}]}); activeIdx = data.days.length-1; render(); if(document.getElementById('editModal').style.display==='flex') { updateSide(); loadDay(activeIdx); } }
-        function saveAll() { localStorage.setItem('gym_a_v1.3', JSON.stringify(data)); render(); closeModal(); }
-        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_a_v1.3'); location.reload(); } }
+        
+        function addNewDay() { 
+            const nextNum = data.days.length;
+            const ordinal = ORDINAL_AR[nextNum] || (nextNum + 1);
+            data.days.push({
+                title: `اليوم ${ordinal}`, 
+                warmup: [], 
+                main: [{name: "تمرين جديد", sets: "3x10"}]
+            }); 
+            activeIdx = data.days.length - 1; 
+            render(); 
+            if(document.getElementById('editModal').style.display==='flex') { updateSide(); loadDay(activeIdx); } 
+        }
+
+        function saveAll() { localStorage.setItem('gym_a_v1.4', JSON.stringify(data)); render(); closeModal(); }
+        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_a_v1.4'); location.reload(); } }
         function exportData() { const blob = new Blob([JSON.stringify(data)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = "gym_backup.json"; a.click(); }
         window.onload = render;
     </script>
