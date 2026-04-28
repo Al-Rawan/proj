@@ -110,7 +110,7 @@
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px; opacity: 0.5;">v1.6 - Clean UI</div>
+            <div style="font-size: 9px; opacity: 0.5;">v1.7 - Backup & Restore</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
@@ -123,7 +123,9 @@
                 <div id="sideList" style="flex: 1; overflow-y: auto;"></div>
                 <button class="btn" style="background:#27ae60; margin-top: 10px;" onclick="addNewDay()">➕ إضافة يوم</button>
                 <div style="margin-top: auto; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #3d4e5f; padding-top: 15px;">
-                    <button class="btn" style="background:#3498db; font-size: 11px;" onclick="exportData()">💾 نسخة احتياطية</button>
+                    <button class="btn" style="background:#3498db; font-size: 11px;" onclick="exportData()">📤 تصدير (Backup)</button>
+                    <button class="btn" style="background:#9b59b6; font-size: 11px;" onclick="document.getElementById('importFile').click()">📥 استيراد (Restore)</button>
+                    <input type="file" id="importFile" style="display:none" accept=".json" onchange="importData(event)">
                     <button class="btn" style="background:#e74c3c; font-size: 11px;" onclick="resetData()">🔄 إعادة ضبط</button>
                     <button class="btn" style="background:#95a5a6;" onclick="closeModal()">إغلاق</button>
                 </div>
@@ -148,6 +150,7 @@
     </div>
 
     <script>
+        const STORAGE_KEY = 'gym_a_v1.7';
         const ORDINAL_AR = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر"];
 
         const ORIGINAL_DATA = {
@@ -194,7 +197,7 @@
             ]
         };
 
-        let data = JSON.parse(localStorage.getItem('gym_a_v1.6')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
+        let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
         let activeIdx = 0;
 
         function render() {
@@ -226,9 +229,42 @@
         function remEx(t, i) { data.days[activeIdx][t].splice(i, 1); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
         function addNewDay() { const nextNum = data.days.length; const ordinal = ORDINAL_AR[nextNum] || (nextNum + 1); data.days.push({title: `اليوم ${ordinal}`, warmup: [], main: [{name: "تمرين جديد", sets: "3x10"}]}); activeIdx = data.days.length - 1; updateSide(); loadDay(activeIdx); }
         function deleteDay() { if(confirm("حذف هذا اليوم نهائياً؟")) { data.days.splice(activeIdx, 1); activeIdx = 0; if(data.days.length === 0) addNewDay(); updateSide(); loadDay(activeIdx); } }
-        function saveAll() { localStorage.setItem('gym_a_v1.6', JSON.stringify(data)); render(); closeModal(); }
-        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_a_v1.6'); location.reload(); } }
-        function exportData() { const blob = new Blob([JSON.stringify(data)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = "gym_backup.json"; a.click(); }
+        function saveAll() { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); render(); closeModal(); }
+        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem(STORAGE_KEY); location.reload(); } }
+        
+        function exportData() { 
+            const blob = new Blob([JSON.stringify(data)], {type:'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `gym_backup_${new Date().toLocaleDateString()}.json`;
+            a.click();
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (imported.days && Array.isArray(imported.days)) {
+                        data = imported;
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                        render();
+                        updateSide();
+                        loadDay(0);
+                        alert("✅ تم استيراد البيانات بنجاح!");
+                    } else {
+                        alert("❌ ملف غير صالح.");
+                    }
+                } catch (err) {
+                    alert("❌ خطأ في قراءة الملف.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
         window.onload = render;
     </script>
 </body>
