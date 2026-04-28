@@ -8,17 +8,13 @@
     <style>
         :root {
             --primary-color: #1a1a1a;
-            --accent-color: #1e3799; /* العودة للون الأصلي */
+            --accent-color: #1e3799;
             --gold-color: #d4af37;
             --border-color: #d1d8e0;
             --bg-color: #ffffff;
         }
 
-        @page { 
-            size: 297mm 210mm; 
-            margin: 0mm !important; 
-        }
-
+        @page { size: 297mm 210mm; margin: 0mm !important; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
@@ -32,7 +28,6 @@
             background-color: var(--bg-color); border: 1px solid #ccc;
             padding: 10px; display: flex; flex-direction: column;
             position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
 
         @media print {
@@ -43,107 +38,83 @@
 
         .header {
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--gold-color); padding-bottom: 5px; margin-bottom: 10px;
+            border-bottom: 2px solid var(--gold-color); padding-bottom: 5px; margin-bottom: 8px;
             height: 50px; flex-shrink: 0;
         }
 
+        .gym-info { display: flex; align-items: center; gap: 12px; border-left: 2px solid #eee; padding-left: 15px; }
+        .logo-img { height: 45px; width: auto; }
         .gym-name { font-size: 22px; font-weight: 900; color: var(--accent-color); }
 
-        .days-container {
-            display: grid; gap: 8px; flex: 1; min-height: 0;
-        }
+        .plan-info { flex: 1; display: flex; justify-content: flex-start; padding-right: 30px; font-weight: 700; color: #2d3436; }
+        .info-item { color: var(--accent-color); margin-right: 5px; }
 
-        .day-card {
-            border: 1px solid var(--border-color); border-radius: 8px;
-            display: flex; flex-direction: column; background: #fff;
-            min-width: 0;
-        }
+        .days-container { display: grid; gap: 8px; flex: 1; min-height: 0; }
+        .day-card { border: 1px solid var(--border-color); border-radius: 8px; display: flex; flex-direction: column; background: #fff; }
+        .day-title { background: var(--accent-color); color: white; padding: 8px; text-align: center; font-size: 18px; font-weight: 700; }
 
-        .day-title {
-            background: var(--accent-color); color: white; padding: 8px;
-            text-align: center; font-size: 18px; font-weight: 700;
-        }
+        .warmup { background: #fff3cd; padding: 4px 6px; border-bottom: 1px solid var(--gold-color); }
+        .warmup-title { color: #856404; font-weight: 700; font-size: 14px; margin-bottom: 2px; }
 
-        .warmup { background: #fff3cd; padding: 5px; border-bottom: 1px solid var(--gold-color); }
-        .warmup-title { color: #856404; font-weight: 700; font-size: 14px; }
-
-        .exercise-list { padding: 5px; flex: 1; overflow: hidden; }
+        .exercise-list { padding: 4px; flex: 1; }
+        .exercise { display: flex; align-items: center; padding: 2px 5px; margin-bottom: 2px; background: #f8f9fa; border-radius: 4px; font-size: 14px; }
         
-        .exercise {
-            display: flex; align-items: center; padding: 3px 5px; margin-bottom: 3px;
-            background: #f8f9fa; border-radius: 4px; font-size: 14px;
-        }
+        /* التحجيم التلقائي للأيام الكثيرة */
+        .container.many-days .exercise { padding: 1px 3px; font-size: 12px; }
+        .container.many-days .day-title { font-size: 15px; padding: 5px; }
 
-        .container.many-days .exercise-name { font-size: 11px; }
-        .container.many-days .day-title { font-size: 15px; }
+        .exercise-num { background: var(--accent-color); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: 6px; flex-shrink: 0; font-weight: 700; }
+        .exercise-name { flex: 1; font-weight: 600; color: #1a1a1a; }
+        .exercise-sets { background: var(--gold-color); color: white; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
 
-        .exercise-num {
-            background: var(--accent-color); color: white; width: 20px; height: 20px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 11px; margin-left: 5px; flex-shrink: 0;
-        }
+        .footer { height: 30px; border-top: 1px solid #eee; padding-top: 5px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666; padding: 0 10px; }
+        .footer strong { color: var(--accent-color); }
 
-        .exercise-name { flex: 1; font-weight: 600; }
-        .exercise-sets { background: var(--gold-color); color: white; padding: 1px 6px; border-radius: 10px; font-size: 10px; font-weight: 700; }
-
-        .footer {
-            height: 30px; border-top: 1px solid #eee; padding-top: 5px;
-            display: flex; justify-content: space-between; font-size: 12px; color: #666;
-        }
-
+        /* Controls */
         .controls { display: flex; gap: 10px; margin-bottom: 15px; }
-        .btn {
-            padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;
-            font-family: 'Cairo'; font-weight: 700; color: white; transition: 0.3s;
-        }
+        .btn { padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-family: 'Cairo'; font-weight: 700; color: white; }
         .btn-edit { background: var(--gold-color); }
-        .btn-print { background: var(--accent-color); }
         .btn-add { background: #28a745; }
+        .btn-print { background: var(--accent-color); }
 
-        /* Modal Edit */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
-        }
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
         .modal.active { display: flex; }
-        .modal-content {
-            background: white; width: 90%; max-width: 900px; height: 85vh; border-radius: 15px;
-            display: flex; overflow: hidden;
-        }
+        .modal-content { background: white; width: 95%; max-width: 900px; height: 85vh; border-radius: 15px; display: flex; overflow: hidden; }
         .sidebar { width: 200px; background: #2c3e50; color: white; padding: 20px; }
         .main-edit { flex: 1; padding: 25px; overflow-y: auto; }
-        .day-select-btn {
-            width: 100%; padding: 10px; margin-bottom: 5px; border: none; background: rgba(255,255,255,0.1);
-            color: white; text-align: right; cursor: pointer; border-radius: 5px; font-family: 'Cairo';
-        }
-        .day-select-btn.active { background: var(--gold-color); }
-
-        .edit-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: center; }
-        .edit-row input { padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Cairo'; }
+        .edit-row { display: flex; gap: 10px; margin-bottom: 8px; }
+        .edit-row input { padding: 8px; border: 1px solid #ddd; border-radius: 5px; flex: 1; font-family: 'Cairo'; }
+        .day-sel { width: 100%; padding: 10px; margin-bottom: 5px; background: rgba(255,255,255,0.1); color: white; border: none; text-align: right; cursor: pointer; border-radius: 5px; }
+        .day-sel.active { background: var(--gold-color); }
     </style>
 </head>
 <body>
 
     <div class="controls no-print">
-        <button class="btn btn-edit" onclick="openModal()">✏️ تعديل الجدول</button>
+        <button class="btn btn-edit" onclick="openModal()">✏️ تعديل التمارين</button>
         <button class="btn btn-add" onclick="addNewDay()">➕ إضافة يوم جديد</button>
         <button class="btn btn-print" onclick="window.print()">🖨️ طباعة الجدول</button>
         <button class="btn" style="background:#636e72" onclick="exportData()">💾 نسخة احتياطية</button>
         <button class="btn" style="background:#dc3545" onclick="resetData()">🔄 إعادة ضبط</button>
     </div>
 
-    <div class="container" id="mainWrapper">
+    <div class="container" id="mainLayout">
         <div class="header">
-            <div class="gym-name">قاعة الزاب الرياضية</div>
-            <div style="font-weight: 700; color: var(--accent-color);">🏗️ جدول بناء الأجسام - <span id="monthName" contenteditable="true">الشهر الأول</span></div>
-            <img src="LOGOz.png" height="40" onerror="this.style.display='none'">
+            <div class="gym-info">
+                <img src="LOGOz.png" class="logo-img" onerror="this.style.display='none'">
+                <div class="gym-name">قاعة الزاب الرياضية</div>
+            </div>
+            <div class="plan-info">
+                <div>🏗️ جدول بناء الأجسام - <span class="info-item" id="monthTxt" contenteditable="true">الشهر الأول</span></div>
+            </div>
         </div>
 
-        <div class="days-container" id="daysDisplay"></div>
+        <div class="days-container" id="daysWrapper"></div>
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px;">v1.1 - نظام الأيام الذكي</div>
+            <div style="font-size: 9px; opacity: 0.5;">v1.2 - Dynamic Engine</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
@@ -152,180 +123,114 @@
         <div class="modal-content">
             <div class="sidebar">
                 <h3>الأيام</h3>
-                <div id="sidebarDays"></div>
-                <button class="btn btn-add" style="width:100%; margin-top:20px;" onclick="addNewDay()">➕ إضافة يوم</button>
+                <div id="sideList"></div>
+                <button class="btn btn-add" style="width:100%; margin-top:20px" onclick="addNewDay()">➕ إضافة يوم</button>
                 <button class="btn" style="width:100%; margin-top:10px; background:#e74c3c" onclick="closeModal()">إغلاق</button>
             </div>
             <div class="main-edit">
-                <h2 id="editDayTitle">تعديل اليوم</h2>
-                <button class="btn" style="background:#c0392b; font-size:12px; margin-bottom:15px;" onclick="deleteCurrentDay()">🗑️ حذف هذا اليوم</button>
+                <h2 id="editTitle">تعديل اليوم</h2>
+                <button class="btn" style="background:#c0392b; font-size:11px; margin-bottom:15px" onclick="deleteDay()">🗑️ حذف اليوم</button>
                 
-                <h4 style="color: var(--accent-color); margin-bottom:10px;">🔥 تمارين الإحماء</h4>
-                <div id="warmupList"></div>
-                <button class="btn" style="background:#f39c12; font-size:12px;" onclick="addItem('warmup')">➕ إضافة إحماء</button>
+                <h4 style="color:var(--accent-color)">🔥 الإحماء</h4>
+                <div id="warmEditor"></div>
+                <button class="btn" style="background:#f39c12; font-size:11px" onclick="addEx('warmup')">➕ إضافة إحماء</button>
 
-                <h4 style="color: var(--accent-color); margin:20px 0 10px;">🏋️ التمارين الأساسية</h4>
-                <div id="mainList"></div>
-                <button class="btn" style="background:#2980b9; font-size:12px;" onclick="addItem('main')">➕ إضافة تمرين</button>
+                <h4 style="color:var(--accent-color); margin-top:20px">🏋️ التمارين الرئيسية</h4>
+                <div id="mainEditor"></div>
+                <button class="btn" style="background:#2980b9; font-size:11px" onclick="addEx('main')">➕ إضافة تمرين</button>
 
-                <div style="margin-top:30px; border-top:1px solid #eee; padding-top:20px;">
-                    <button class="btn" style="background:var(--accent-color); width:100%; padding:15px;" onclick="saveAndClose()">💾 حفظ واعتماد التغييرات</button>
-                </div>
+                <button class="btn" style="background:var(--accent-color); width:100%; margin-top:30px; padding:15px" onclick="saveAll()">💾 حفظ واعتماد التغييرات</button>
             </div>
         </div>
     </div>
 
     <script>
-        const INITIAL_DATA = {
+        // إعادة كافة التمارين الأصلية بدقة
+        const ORIGINAL_DATA = {
+            month: "الشهر الأول",
             days: [
                 {
-                    title: "اليوم الأول",
+                    title: "اليوم الأول (صدر + تراي)",
                     warmup: [{name: "جري", sets: "5د"}, {name: "شناو", sets: "3x10"}],
                     main: [
                         {name: "بنج مستوي", sets: "12-10-8"},
                         {name: "بنج اعلى همر", sets: "12-10-8"},
                         {name: "بنج اعلى دمبلص", sets: "12-10-8"},
-                        {name: "تراي حبل", sets: "12-10-8"}
+                        {name: "بنج اسفل دمبلص", sets: "12-10-8"},
+                        {name: "فراشة جهاز", sets: "12-10-8"},
+                        {name: "تراي حبل", sets: "12-10-8"},
+                        {name: "تراي ضيق بالشيفت", sets: "12-10-8"},
+                        {name: "تراي جك بالدمبلص", sets: "12-10-8"}
                     ]
                 },
                 {
-                    title: "اليوم الثاني",
-                    warmup: [{name: "عقلة", sets: "3x10"}],
+                    title: "اليوم الثاني (ظهر + باي)",
+                    warmup: [{name: "عقلة", sets: "3x10"}, {name: "سحب ارضي", sets: "3x10"}],
                     main: [
                         {name: "سحب خلفي", sets: "12-10-8"},
                         {name: "سحب امامي", sets: "12-10-8"},
-                        {name: "باي شيفت", sets: "12-10-8"},
-                        {name: "باي دمبلص", sets: "12-10-8"}
+                        {name: "سحب همر", sets: "12-10-8"},
+                        {name: "سحب كيبل (T-bar)", sets: "12-10-8"},
+                        {name: "باي شيفت زكزاك", sets: "12-10-8"},
+                        {name: "باي دمبلص تبادل", sets: "12-10-8"},
+                        {name: "باي همر دمبلص", sets: "12-10-8"},
+                        {name: "باي ارتكاز دمبلص", sets: "12-10-8"}
                     ]
                 },
                 {
-                    title: "اليوم الثالث",
-                    warmup: [{name: "دبني", sets: "3x15"}],
+                    title: "اليوم الثالث (أكتاف + أرجل)",
+                    warmup: [{name: "دبني", sets: "3x15"}, {name: "جهاز ارجل", sets: "3x15"}],
                     main: [
-                        {name: "ضغط اكتاف", sets: "12-10-8"},
+                        {name: "ضغط اكتاف دمبلص", sets: "12-10-8"},
                         {name: "رفرفة جانبي", sets: "12-10-8"},
+                        {name: "رفرفة امامي", sets: "12-10-8"},
+                        {name: "ضغط اكتاف خلفي", sets: "12-10-8"},
                         {name: "قرفصاء (Squat)", sets: "12-10-8"},
-                        {name: "معدة", sets: "3x20"}
+                        {name: "ضغط ارجل جهاز", sets: "12-10-8"},
+                        {name: "معدة جذع", sets: "3x20"},
+                        {name: "رفع ساق", sets: "3x20"}
                     ]
                 }
             ]
         };
 
-        let schedule = JSON.parse(localStorage.getItem('gym_building_v1.1')) || JSON.parse(JSON.stringify(INITIAL_DATA));
-        let activeIndex = 0;
+        let data = JSON.parse(localStorage.getItem('gym_b_v1.2')) || JSON.parse(JSON.stringify(ORIGINAL_DATA));
+        let activeIdx = 0;
 
         function render() {
-            const container = document.getElementById('daysDisplay');
-            const wrapper = document.getElementById('mainWrapper');
-            const count = schedule.days.length;
+            const container = document.getElementById('daysWrapper');
+            const layout = document.getElementById('mainLayout');
+            const count = data.days.length;
             container.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
-            if (count > 3) wrapper.classList.add('many-days');
-            else wrapper.classList.remove('many-days');
+            if (count > 3) layout.classList.add('many-days');
+            else layout.classList.remove('many-days');
 
-            container.innerHTML = schedule.days.map((day, i) => `
+            container.innerHTML = data.days.map(day => `
                 <div class="day-card">
                     <div class="day-title">${day.title}</div>
                     <div class="warmup">
                         <div class="warmup-title">🔥 الإحماء</div>
-                        ${day.warmup.map((ex, j) => `<div class="exercise"><div class="exercise-num">${j+1}</div><div class="exercise-name">${ex.name}</div><div class="exercise-sets">${ex.sets}</div></div>`).join('')}
+                        ${day.warmup.map((ex, i) => `<div class="exercise"><div class="exercise-num">${i+1}</div><div class="exercise-name">${ex.name}</div><div class="exercise-sets">${ex.sets}</div></div>`).join('')}
                     </div>
                     <div class="exercise-list">
-                        ${day.main.map((ex, j) => `<div class="exercise"><div class="exercise-num">${j+1}</div><div class="exercise-name">${ex.name}</div><div class="exercise-sets">${ex.sets}</div></div>`).join('')}
+                        ${day.main.map((ex, i) => `<div class="exercise"><div class="exercise-num">${i+1}</div><div class="exercise-name">${ex.name}</div><div class="exercise-sets">${ex.sets}</div></div>`).join('')}
                     </div>
                 </div>
             `).join('');
         }
 
-        function openModal() {
-            document.getElementById('editModal').classList.add('active');
-            updateSidebar();
-            loadDay(activeIndex);
-        }
-
+        function openModal() { document.getElementById('editModal').classList.add('active'); updateSide(); loadDay(activeIdx); }
         function closeModal() { document.getElementById('editModal').classList.remove('active'); }
-
-        function updateSidebar() {
-            document.getElementById('sidebarDays').innerHTML = schedule.days.map((day, i) => `
-                <button class="day-select-btn ${i === activeIndex ? 'active' : ''}" onclick="loadDay(${i})">${day.title}</button>
-            `).join('');
-        }
-
-        function loadDay(index) {
-            activeIndex = index;
-            updateSidebar();
-            document.getElementById('editDayTitle').innerText = `تعديل: ${schedule.days[index].title}`;
-            renderList('warmup', 'warmupList');
-            renderList('main', 'mainList');
-        }
-
-        function renderList(type, containerId) {
-            const list = schedule.days[activeIndex][type];
-            document.getElementById(containerId).innerHTML = list.map((item, i) => `
-                <div class="edit-row">
-                    <input type="text" style="flex:2" value="${item.name}" oninput="schedule.days[${activeIndex}].${type}[${i}].name=this.value">
-                    <input type="text" style="flex:1" value="${item.sets}" oninput="schedule.days[${activeIndex}].${type}[${i}].sets=this.value">
-                    <button onclick="removeItem('${type}', ${i})">❌</button>
-                </div>
-            `).join('');
-        }
-
-        function addItem(type) {
-            schedule.days[activeIndex][type].push({name: "جديد", sets: "12-10-8"});
-            renderList(type, type === 'warmup' ? 'warmupList' : 'mainList');
-        }
-
-        function removeItem(type, index) {
-            schedule.days[activeIndex][type].splice(index, 1);
-            renderList(type, type === 'warmup' ? 'warmupList' : 'mainList');
-        }
-
-        function addNewDay() {
-            const num = schedule.days.length + 1;
-            const titles = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
-            schedule.days.push({
-                title: `اليوم ${titles[num-1] || num}`,
-                warmup: [],
-                main: [{name: "تمرين جديد", sets: "12-10-8"}]
-            });
-            activeIndex = schedule.days.length - 1;
-            render();
-            if (document.getElementById('editModal').classList.contains('active')) {
-                updateSidebar();
-                loadDay(activeIndex);
-            }
-        }
-
-        function deleteCurrentDay() {
-            if (schedule.days.length <= 1) return alert("يجب وجود يوم واحد على الأقل");
-            if (confirm("حذف اليوم؟")) {
-                schedule.days.splice(activeIndex, 1);
-                activeIndex = 0;
-                loadDay(0);
-                render();
-            }
-        }
-
-        function saveAndClose() {
-            localStorage.setItem('gym_building_v1.1', JSON.stringify(schedule));
-            render();
-            closeModal();
-        }
-
-        function resetData() {
-            if (confirm("إعادة الجداول الأصلية؟")) {
-                localStorage.removeItem('gym_building_v1.1');
-                location.reload();
-            }
-        }
-
-        function exportData() {
-            const data = JSON.stringify(schedule);
-            const blob = new Blob([data], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = "gym_building_backup.json"; a.click();
-        }
-
+        function updateSide() { document.getElementById('sideList').innerHTML = data.days.map((d, i) => `<button class="day-sel ${i===activeIdx?'active':''}" onclick="loadDay(${i})">${d.title}</button>`).join(''); }
+        function loadDay(i) { activeIdx = i; updateSide(); document.getElementById('editTitle').innerText = data.days[i].title; renderEx('warmup', 'warmEditor'); renderEx('main', 'mainEditor'); }
+        function renderEx(type, id) { document.getElementById(id).innerHTML = data.days[activeIdx][type].map((ex, i) => `<div class="edit-row"><input type="text" value="${ex.name}" oninput="data.days[${activeIdx}].${type}[${i}].name=this.value"><input type="text" style="flex:0.4" value="${ex.sets}" oninput="data.days[${activeIdx}].${type}[${i}].sets=this.value"><button onclick="remEx('${type}',${i})">❌</button></div>`).join(''); }
+        function addEx(t) { data.days[activeIdx][t].push({name:"جديد", sets:"12-10-8"}); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
+        function remEx(t, i) { data.days[activeIdx][t].splice(i, 1); renderEx(t, t==='warmup'?'warmEditor':'mainEditor'); }
+        function addNewDay() { data.days.push({title:"يوم جديد", warmup:[], main:[{name:"تمرين جديد", sets:"12-10-8"}]}); activeIdx = data.days.length-1; render(); if(document.getElementById('editModal').classList.contains('active')) { updateSide(); loadDay(activeIdx); } }
+        function deleteDay() { if(data.days.length<=1) return; data.days.splice(activeIdx,1); activeIdx=0; render(); loadDay(0); }
+        function saveAll() { localStorage.setItem('gym_b_v1.2', JSON.stringify(data)); render(); closeModal(); }
+        function resetData() { if(confirm("إعادة الجداول الأصلية؟")) { localStorage.removeItem('gym_b_v1.2'); location.reload(); } }
+        function exportData() { const blob = new Blob([JSON.stringify(data)], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = "gym_building_v1.2.json"; a.click(); }
         window.onload = render;
     </script>
 </body>
