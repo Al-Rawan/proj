@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول البناء - الشهر الأول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --accent-color: #1e3799;
+            --gold-color: #d4af37;
+            --border-color: #d1d8e0;
+            --bg-color: #ffffff;
+        }
+
+        @page { 
+            size: 297mm 210mm; 
+            margin: 0mm !important; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f1f2f6;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: auto;
+            padding: 20px 0;
+        }
+
+        @media screen {
+            .container {
+                zoom: 0.9;
+            }
+        }
+
+        @media screen and (max-width: 250mm) {
+            .container {
+                zoom: 0.8;
+            }
+        }
+
+        @media print {
+            html, body {
+                width: 297mm !important;
+                height: 210mm !important;
+                overflow: hidden !important;
+                background: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            body {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            .container {
+                border: none !important;
+                box-shadow: none !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                width: 285mm !important;
+                height: 198mm !important;
+                background: white !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                box-sizing: border-box !important;
+            }
+            .header, .footer {
+                padding: 0 10mm !important;
+            }
+            .days-container {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 5px !important;
+                flex: 1 !important;
+                padding: 0 10mm !important;
+                box-sizing: border-box !important;
+            }
+            .day-card {
+                break-inside: avoid !important;
+                font-size: 0.95em !important;
+            }
+            .edit-btn, .print-btn, .action-buttons, .version {
+                display: none !important;
+            }
+            .header { margin-bottom: 5px !important; }
+            .footer { margin-top: 5px !important; }
+        }
+
+        .container {
+            width: 280mm;
+            height: 195mm;
+            min-width: 280mm;
+            min-height: 195mm;
+            background-color: var(--bg-color);
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold-color);
+            padding-bottom: 5px;
+            margin-bottom: 6px;
+            height: 45px;
+            flex-shrink: 0;
+        }
+
+        .gym-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 2px solid #eee;
+            padding-left: 15px;
+            margin-left: 15px;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        .gym-name {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent-color);
+            white-space: nowrap;
+        }
+
+        .plan-info {
+            display: flex;
+            gap: 15px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #2d3436;
+            flex-grow: 1;
+            justify-content: flex-start;
+            padding-right: 30px;
+        }
+
+        .info-item {
+            color: var(--accent-color);
+        }
+
+        .version {
+            text-align: center;
+            color: #999;
+            margin-bottom: 5px;
+            font-size: 0.75em;
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            flex: 1;
+        }
+
+        .day-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .day-title {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .warmup {
+            background: #fff3cd;
+            padding: 4px 5px;
+            border-bottom: 2px solid var(--gold-color);
+        }
+
+        .warmup-title {
+            color: #856404;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .exercise-list {
+            padding: 4px 5px;
+        }
+
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            padding: 4px 6px;
+            background: var(--accent-color);
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+            border-radius: 3px;
+        }
+
+        .exercise-header .header-num {
+            width: 20px;
+            margin-left: 5px;
+            text-align: center;
+        }
+
+        .exercise-header .header-name {
+            flex: 1;
+        }
+
+        .exercise-header .header-sets {
+            width: 70px;
+            text-align: center;
+        }
+
+        .exercise {
+            display: flex;
+            align-items: center;
+            padding: 2px 4px;
+            margin-bottom: 2px;
+            background: #f8f9fa;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .exercise-num {
+            background: var(--accent-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+
+        .exercise-name {
+            flex: 1;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .exercise-sets {
+            background: var(--gold-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .footer {
+            height: 28px;
+            margin-top: 5px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            flex-shrink: 0;
+            color: #636e72;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .footer strong {
+            color: var(--accent-color);
+        }
+
+        .footer-left,
+        .footer-right {
+            font-weight: 600;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-right: 20px;
+        }
+
+        .edit-btn,
+        .print-btn {
+            background: var(--gold-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .edit-btn:hover,
+        .print-btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            height: 80vh;
+            border-radius: 15px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        }
+
+        .modal-sidebar {
+            width: 200px;
+            background: var(--accent-color);
+            color: white;
+            padding: 20px;
+        }
+
+        .modal-sidebar h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid var(--gold-color);
+            padding-bottom: 10px;
+        }
+
+        .day-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 12px;
+            margin-bottom: 10px;
+            width: 100%;
+            text-align: right;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .day-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .day-btn.active {
+            background: var(--gold-color);
+            border-color: var(--gold-color);
+        }
+
+        .modal-main {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            color: var(--accent-color);
+            font-size: 24px;
+        }
+
+        .close-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+        }
+
+        .close-btn:hover {
+            background: #c82333;
+        }
+
+        .exercise-editor {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exercise-editor input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+        }
+
+        .exercise-editor .sets-input {
+            width: 100px;
+        }
+
+        .exercise-editor button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .exercise-editor button:hover {
+            opacity: 0.8;
+        }
+
+        .exercise-editor .delete-btn {
+            background: #dc3545;
+        }
+
+        .add-exercise-btn {
+            background: var(--gold-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .add-exercise-btn:hover {
+            background: var(--accent-color);
+        }
+
+        .save-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .save-btn:hover {
+            background: #218838;
+        }
+
+        @media print {
+            .edit-btn, .print-btn, .action-buttons {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- الرأسية -->
+        <div class="header">
+            <div class="gym-info">
+                <img src="LOGOz.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                <div class="gym-name">قاعة الزاب الرياضية</div>
+            </div>
+
+            <div class="plan-info">
+                <div class="info-item">💪 جدول البناء - <span contenteditable="true">الشهر الأول</span></div>
+                <div class="action-buttons">
+                    <button class="edit-btn" onclick="openEditModal()" title="تعديل الجدول">✏️</button>
+                    <button class="print-btn" onclick="window.print()" title="طباعة">🖨️</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="version">الإصدار: v0.1</div>
+
+        <div class="days-container">
+            <!-- اليوم الأول -->
+            <div class="day-card">
+                <div class="day-title">اليوم الأول</div>
+                
+                <div class="warmup">
+                    <div class="warmup-title">🔥 الإحماء</div>
+                    <div class="exercise-list">
+                        <div class="exercise">
+                            <div class="exercise-num">1</div>
+                            <div class="exercise-name">جري</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">2</div>
+                            <div class="exercise-name">لابتكل</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">3</div>
+                            <div class="exercise-name">بايسكل ثابت</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">4</div>
+                            <div class="exercise-name">تويست واقف</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">5</div>
+                            <div class="exercise-name">رفع جذع</div>
+                            <div class="exercise-sets">4x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">6</div>
+                            <div class="exercise-name">رفع ساق</div>
+                            <div class="exercise-sets">3x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">7</div>
+                            <div class="exercise-name">دبني هوائي</div>
+                            <div class="exercise-sets">5x10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-list">
+                    <div class="exercise-header">
+                        <div class="header-num">#</div>
+                        <div class="header-name">التمارين</div>
+                        <div class="header-sets">الجولات</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">1</div>
+                        <div class="exercise-name">بنج مستوي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">2</div>
+                        <div class="exercise-name">بنج اعلى همر</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">3</div>
+                        <div class="exercise-name">بنج اعتيادي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">4</div>
+                        <div class="exercise-name">فتح فراشة</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">5</div>
+                        <div class="exercise-name">شناو</div>
+                        <div class="exercise-sets">3x8</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">6</div>
+                        <div class="exercise-name">تراي حبل</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">7</div>
+                        <div class="exercise-name">تراي شيفت</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اليوم الثاني -->
+            <div class="day-card">
+                <div class="day-title">اليوم الثاني</div>
+                
+                <div class="warmup">
+                    <div class="warmup-title">🔥 الإحماء</div>
+                    <div class="exercise-list">
+                        <div class="exercise">
+                            <div class="exercise-num">1</div>
+                            <div class="exercise-name">جري</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">2</div>
+                            <div class="exercise-name">لابتكل</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">3</div>
+                            <div class="exercise-name">بايسكل ثابت</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">4</div>
+                            <div class="exercise-name">تويست واقف</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">5</div>
+                            <div class="exercise-name">رفع جذع</div>
+                            <div class="exercise-sets">4x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">6</div>
+                            <div class="exercise-name">رفع ساق</div>
+                            <div class="exercise-sets">3x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">7</div>
+                            <div class="exercise-name">دبني هوائي</div>
+                            <div class="exercise-sets">5x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">8</div>
+                            <div class="exercise-name">بلانك</div>
+                            <div class="exercise-sets">8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-list">
+                    <div class="exercise-header">
+                        <div class="header-num">#</div>
+                        <div class="header-name">التمارين</div>
+                        <div class="header-sets">الجولات</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">1</div>
+                        <div class="exercise-name">سحب خلفي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">2</div>
+                        <div class="exercise-name">سحب امامي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">3</div>
+                        <div class="exercise-name">سحب همر علوي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">4</div>
+                        <div class="exercise-name">سحب همر مقلوب</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">5</div>
+                        <div class="exercise-name">سحب سفلي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">6</div>
+                        <div class="exercise-name">سميث</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">7</div>
+                        <div class="exercise-name">سيقان امامي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">8</div>
+                        <div class="exercise-name">سيقان خلفي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">9</div>
+                        <div class="exercise-name">سكواد شيفت</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اليوم الثالث -->
+            <div class="day-card">
+                <div class="day-title">اليوم الثالث</div>
+                
+                <div class="warmup">
+                    <div class="warmup-title">🔥 الإحماء</div>
+                    <div class="exercise-list">
+                        <div class="exercise">
+                            <div class="exercise-num">1</div>
+                            <div class="exercise-name">جري</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">2</div>
+                            <div class="exercise-name">لابتكل</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">3</div>
+                            <div class="exercise-name">بايسكل ثابت</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">4</div>
+                            <div class="exercise-name">تويست واقف</div>
+                            <div class="exercise-sets">5د</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">5</div>
+                            <div class="exercise-name">رفع جذع</div>
+                            <div class="exercise-sets">4x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">6</div>
+                            <div class="exercise-name">رفع ساق</div>
+                            <div class="exercise-sets">3x10</div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-num">7</div>
+                            <div class="exercise-name">دبني هوائي</div>
+                            <div class="exercise-sets">5x10</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-list">
+                    <div class="exercise-header">
+                        <div class="header-num">#</div>
+                        <div class="header-name">التمارين</div>
+                        <div class="header-sets">الجولات</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">1</div>
+                        <div class="exercise-name">باي شيفت</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">2</div>
+                        <div class="exercise-name">بايسيبس جهاز</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">3</div>
+                        <div class="exercise-name">باي شيفت زكزاك</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">4</div>
+                        <div class="exercise-name">رفع جانبي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">5</div>
+                        <div class="exercise-name">رفع امامي</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">6</div>
+                        <div class="exercise-name">رفع علوي همر</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">7</div>
+                        <div class="exercise-name">سواعد</div>
+                        <div class="exercise-sets">3x10</div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-num">8</div>
+                        <div class="exercise-name">طحن معدة</div>
+                        <div class="exercise-sets">4x10</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-right">الكابتن: <strong>ابو العز</strong></div>
+            <div class="footer-left">مدير القاعة: <strong>عمر عبدالواحد</strong></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-sidebar">
+                <h3>الأيام</h3>
+                <button type="button" class="day-btn active" onclick="selectDay(1)">اليوم الأول</button>
+                <button type="button" class="day-btn" onclick="selectDay(2)">اليوم الثاني</button>
+                <button type="button" class="day-btn" onclick="selectDay(3)">اليوم الثالث</button>
+            </div>
+            <div class="modal-main">
+                <div class="modal-header">
+                    <h2 id="dayTitle">اليوم الأول</h2>
+                    <button type="button" class="close-btn" onclick="closeEditModal()">إغلاق</button>
+                </div>
+                <div id="exercisesList"></div>
+                <button type="button" class="add-exercise-btn" onclick="addExercise()">➕ إضافة تمرين</button>
+                
+                <h3 style="margin-top: 30px; color: var(--accent-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">🔥 تمارين الإحماء</h3>
+                <div id="warmupList"></div>
+                <button type="button" class="add-exercise-btn" onclick="addWarmup()">➕ إضافة تمرين إحماء</button>
+                
+                <button type="button" class="save-btn" onclick="saveChanges()">💾 حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // البيانات الافتراضية
+        const defaultData = {
+            warmup: {
+                day1: [
+                    {id: 1, name: "جري", sets: "5د"},
+                    {id: 2, name: "لابتكل", sets: "5د"},
+                    {id: 3, name: "بايسكل ثابت", sets: "5د"},
+                    {id: 4, name: "تويست واقف", sets: "5د"}
+                ],
+                day2: [
+                    {id: 1, name: "جري", sets: "5د"},
+                    {id: 2, name: "لابتكل", sets: "5د"},
+                    {id: 3, name: "بايسكل ثابت", sets: "5د"},
+                    {id: 4, name: "تويست واقف", sets: "5د"}
+                ],
+                day3: [
+                    {id: 1, name: "جري", sets: "5د"},
+                    {id: 2, name: "لابتكل", sets: "5د"},
+                    {id: 3, name: "بايسكل ثابت", sets: "5د"},
+                    {id: 4, name: "تويست واقف", sets: "5د"}
+                ]
+            },
+            day1: [
+                {id: 1, name: "بنج مستوي شيفت + بنج مستوي جهاز", sets: "12-10-8"},
+                {id: 2, name: "بنج اعلى شيفت + بنج اعلى جهاز", sets: "12-10-8"},
+                {id: 3, name: "بنج سفلي شيفت + فتح فراشة", sets: "12-10-8"},
+                {id: 4, name: "شناو", sets: "3x10"},
+                {id: 5, name: "تراي شيفت", sets: "12-10-8"},
+                {id: 6, name: "تراي حبل", sets: "12-10-8"},
+                {id: 7, name: "سحب شيفت رقبة", sets: "12-10-8"},
+                {id: 8, name: "سواعد", sets: "3x10"},
+                {id: 9, name: "معدة جذع", sets: "-"}
+            ],
+            day2: [
+                {id: 1, name: "سحب خلفي", sets: "12-10-8"},
+                {id: 2, name: "سحب امامي", sets: "12-10-8"},
+                {id: 3, name: "سحب ضيق همر", sets: "12-10-8"},
+                {id: 4, name: "سحب شيفت سفلي", sets: "12-10-8"},
+                {id: 5, name: "بايسيبس شيفت", sets: "12-10-8"},
+                {id: 6, name: "شيفت زكزاك", sets: "12-10-8"},
+                {id: 7, name: "دامبلص", sets: "12-10-8"},
+                {id: 8, name: "همر دامبلص", sets: "12-10-8"},
+                {id: 9, name: "طحن معدة", sets: "12-10-8"}
+            ],
+            day3: [
+                {id: 1, name: "رفع امامي", sets: "3x8"},
+                {id: 2, name: "رفع جانبي", sets: "3x8"},
+                {id: 3, name: "رفع جهاز همر", sets: "3x8"},
+                {id: 4, name: "رفع علوي همر", sets: "3x8"},
+                {id: 5, name: "سيقان امامي", sets: "3x8"},
+                {id: 6, name: "سيقان خلفي", sets: "3x8"},
+                {id: 7, name: "سميث", sets: "3x8"},
+                {id: 8, name: "رفع اعلى", sets: "3x8"},
+                {id: 9, name: "كولف", sets: "3x10"}
+            ]
+        };
+
+        let scheduleData = JSON.parse(localStorage.getItem('building_schedule')) || JSON.parse(JSON.stringify(defaultData));
+        let currentDay = 1;
+
+        function openEditModal() {
+            document.getElementById('editModal').classList.add('active');
+            selectDay(1);
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+        }
+
+        function selectDay(dayNum) {
+            currentDay = dayNum;
+            document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const dayTitles = ['اليوم الأول', 'اليوم الثاني', 'اليوم الثالث'];
+            document.getElementById('dayTitle').textContent = dayTitles[dayNum - 1];
+            
+            renderExercises();
+            renderWarmup();
+        }
+
+        function renderExercises() {
+            const container = document.getElementById('exercisesList');
+            const exercises = scheduleData[`day${currentDay}`];
+            
+            container.innerHTML = exercises.map((ex, index) => `
+                <div class="exercise-editor" data-id="${ex.id}">
+                    <span style="font-weight: 700; color: var(--accent-color); width: 30px;">${index + 1}</span>
+                    <input type="text" value="${ex.name}" onchange="updateExercise(${ex.id}, 'name', this.value)" placeholder="اسم التمرين">
+                    <input type="text" class="sets-input" value="${ex.sets}" onchange="updateExercise(${ex.id}, 'sets', this.value)" placeholder="الجولات">
+                    <button type="button" onclick="moveUp(${ex.id})" ${index === 0 ? 'disabled' : ''}>⬆️</button>
+                    <button type="button" onclick="moveDown(${ex.id})" ${index === exercises.length - 1 ? 'disabled' : ''}>⬇️</button>
+                    <button type="button" class="delete-btn" onclick="deleteExercise(${ex.id})">❌</button>
+                </div>
+            `).join('');
+        }
+
+        function renderWarmup() {
+            const container = document.getElementById('warmupList');
+            const warmups = scheduleData.warmup[`day${currentDay}`];
+            
+            container.innerHTML = warmups.map((ex, index) => `
+                <div class="exercise-editor" data-id="${ex.id}">
+                    <span style="font-weight: 700; color: #856404; width: 30px;">${index + 1}</span>
+                    <input type="text" value="${ex.name}" onchange="updateWarmup(${ex.id}, 'name', this.value)" placeholder="اسم التمرين">
+                    <input type="text" class="sets-input" value="${ex.sets}" onchange="updateWarmup(${ex.id}, 'sets', this.value)" placeholder="المدة/العدد">
+                    <button type="button" onclick="moveWarmupUp(${ex.id})" ${index === 0 ? 'disabled' : ''}>⬆️</button>
+                    <button type="button" onclick="moveWarmupDown(${ex.id})" ${index === warmups.length - 1 ? 'disabled' : ''}>⬇️</button>
+                    <button type="button" class="delete-btn" onclick="deleteWarmup(${ex.id})">❌</button>
+                </div>
+            `).join('');
+        }
+
+        function updateExercise(id, field, value) {
+            const exercises = scheduleData[`day${currentDay}`];
+            const exercise = exercises.find(ex => ex.id === id);
+            if (exercise) {
+                exercise[field] = value;
+            }
+        }
+
+        function updateWarmup(id, field, value) {
+            const warmups = scheduleData.warmup[`day${currentDay}`];
+            const warmup = warmups.find(ex => ex.id === id);
+            if (warmup) {
+                warmup[field] = value;
+            }
+        }
+
+        function addExercise() {
+            const exercises = scheduleData[`day${currentDay}`];
+            const newId = Math.max(...exercises.map(ex => ex.id), 0) + 1;
+            exercises.push({id: newId, name: 'تمرين جديد', sets: '3x10'});
+            renderExercises();
+        }
+
+        function addWarmup() {
+            const warmups = scheduleData.warmup[`day${currentDay}`];
+            const newId = Math.max(...warmups.map(ex => ex.id), 0) + 1;
+            warmups.push({id: newId, name: 'تمرين إحماء', sets: '5د'});
+            renderWarmup();
+        }
+
+        function deleteExercise(id) {
+            const exercises = scheduleData[`day${currentDay}`];
+            scheduleData[`day${currentDay}`] = exercises.filter(ex => ex.id !== id);
+            renderExercises();
+        }
+
+        function deleteWarmup(id) {
+            const warmups = scheduleData.warmup[`day${currentDay}`];
+            scheduleData.warmup[`day${currentDay}`] = warmups.filter(ex => ex.id !== id);
+            renderWarmup();
+        }
+
+        function moveUp(id) {
+            const exercises = scheduleData[`day${currentDay}`];
+            const index = exercises.findIndex(ex => ex.id === id);
+            if (index > 0) {
+                [exercises[index], exercises[index - 1]] = [exercises[index - 1], exercises[index]];
+                renderExercises();
+            }
+        }
+
+        function moveDown(id) {
+            const exercises = scheduleData[`day${currentDay}`];
+            const index = exercises.findIndex(ex => ex.id === id);
+            if (index < exercises.length - 1) {
+                [exercises[index], exercises[index + 1]] = [exercises[index + 1], exercises[index]];
+                renderExercises();
+            }
+        }
+
+        function moveWarmupUp(id) {
+            const warmups = scheduleData.warmup[`day${currentDay}`];
+            const index = warmups.findIndex(ex => ex.id === id);
+            if (index > 0) {
+                [warmups[index], warmups[index - 1]] = [warmups[index - 1], warmups[index]];
+                renderWarmup();
+            }
+        }
+
+        function moveWarmupDown(id) {
+            const warmups = scheduleData.warmup[`day${currentDay}`];
+            const index = warmups.findIndex(ex => ex.id === id);
+            if (index < warmups.length - 1) {
+                [warmups[index], warmups[index + 1]] = [warmups[index + 1], warmups[index]];
+                renderWarmup();
+            }
+        }
+
+        function saveChanges() {
+            localStorage.setItem('building_schedule', JSON.stringify(scheduleData));
+            updatePageDisplay();
+            alert('✅ تم حفظ التغييرات بنجاح!');
+            closeEditModal();
+        }
+
+        function updatePageDisplay() {
+            for (let dayNum = 1; dayNum <= 3; dayNum++) {
+                const dayCards = document.querySelectorAll('.day-card');
+                
+                // تحديث تمارين الإحماء
+                if (scheduleData.warmup && scheduleData.warmup[`day${dayNum}`]) {
+                    const warmupList = dayCards[dayNum - 1].querySelector('.warmup .exercise-list');
+                    if (warmupList) {
+                        warmupList.innerHTML = scheduleData.warmup[`day${dayNum}`].map((ex, index) => `
+                            <div class="exercise">
+                                <div class="exercise-num">${index + 1}</div>
+                                <div class="exercise-name">${ex.name}</div>
+                                <div class="exercise-sets">${ex.sets}</div>
+                            </div>
+                        `).join('');
+                    }
+                }
+                
+                // تحديث التمارين الرئيسية
+                const exercises = scheduleData[`day${dayNum}`];
+                const exerciseList = dayCards[dayNum - 1].querySelector('.exercise-list:not(.warmup .exercise-list)');
+                
+                const header = exerciseList.querySelector('.exercise-header');
+                exerciseList.innerHTML = header.outerHTML + exercises.map((ex, index) => `
+                    <div class="exercise">
+                        <div class="exercise-num">${index + 1}</div>
+                        <div class="exercise-name">${ex.name}</div>
+                        <div class="exercise-sets">${ex.sets}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // تحميل البيانات عند فتح الصفحة
+        window.addEventListener('load', function() {
+            updatePageDisplay();
+        });
+    </script>
+</body>
+</html>
