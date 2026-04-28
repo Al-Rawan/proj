@@ -31,6 +31,7 @@
             zoom: 0.9;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+            overflow: hidden;
         }
 
         @media print {
@@ -113,7 +114,7 @@
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px; opacity: 0.5;">v1.9 - Extra Bold</div>
+            <div style="font-size: 8px; opacity: 0.5;">v1.10 - Final Sync</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
@@ -149,9 +150,8 @@
     </div>
 
     <script>
-        const STORAGE_KEY = 'gym_b_v1.9';
+        const STORAGE_KEY = 'gym_b_v1.10';
         const ORDINAL_AR = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر"];
-
         const ORIGINAL_DATA = {
             month: "الشهر الأول",
             days: [
