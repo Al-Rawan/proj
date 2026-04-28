@@ -26,11 +26,12 @@
         .container {
             width: 280mm; height: 195mm;
             background-color: var(--bg-color); border: 1px solid #ccc;
-            padding: 10px; display: flex; flex-direction: column;
+            padding: 8px; display: flex; flex-direction: column;
             position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.1);
             zoom: 0.9;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+            overflow: hidden; /* لمنع الخروج عن الورقة */
         }
 
         @media print {
@@ -41,41 +42,40 @@
 
         .header {
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--gold-color); padding-bottom: 5px; margin-bottom: 10px;
-            height: 50px; flex-shrink: 0;
+            border-bottom: 2px solid var(--gold-color); padding-bottom: 5px; margin-bottom: 8px;
+            height: 45px; flex-shrink: 0;
         }
 
-        .gym-info { display: flex; align-items: center; gap: 12px; border-left: 2px solid #eee; padding-left: 15px; }
-        .logo-img { height: 45px; width: auto; }
-        .gym-name { font-size: 22px; font-weight: 900; color: var(--accent-color); }
+        .gym-info { display: flex; align-items: center; gap: 10px; border-left: 2px solid #eee; padding-left: 12px; }
+        .logo-img { height: 40px; width: auto; }
+        .gym-name { font-size: 20px; font-weight: 900; color: var(--accent-color); }
 
-        .plan-info { flex: 1; display: flex; justify-content: flex-start; padding-right: 30px; font-weight: 700; color: #2d3436; }
+        .plan-info { flex: 1; display: flex; justify-content: flex-start; padding-right: 20px; font-weight: 700; color: #2d3436; }
         .info-item { color: var(--accent-color); margin-right: 5px; }
 
-        .days-container { display: grid; gap: 10px; flex: 1; min-height: 0; }
-        .day-card { border: 1px solid var(--border-color); border-radius: 10px; display: flex; flex-direction: column; background: #fff; overflow: hidden; }
-        .day-title { background: var(--accent-color); color: white; padding: 10px; text-align: center; font-size: 18px; font-weight: 900; }
+        .days-container { display: grid; gap: 8px; flex: 1; min-height: 0; }
+        .day-card { border: 1px solid var(--border-color); border-radius: 8px; display: flex; flex-direction: column; background: #fff; overflow: hidden; }
+        .day-title { background: var(--accent-color); color: white; padding: 6px; text-align: center; font-size: 17px; font-weight: 900; }
 
-        .warmup { background: #fff3cd !important; padding: 8px; border-bottom: 1px solid var(--gold-color); display: flex; flex-direction: column; gap: 6px; }
-        .warmup-title { color: #856404; font-weight: 900; font-size: 15px; margin-bottom: 4px; text-align: center; border-bottom: 2px solid rgba(133,100,4,0.1); padding-bottom: 4px; }
+        .warmup { background: #fff3cd !important; padding: 5px; border-bottom: 1px solid var(--gold-color); display: flex; flex-direction: column; gap: 3px; }
+        .warmup-title { color: #856404; font-weight: 900; font-size: 13px; margin-bottom: 2px; text-align: center; border-bottom: 1px solid rgba(133,100,4,0.1); padding-bottom: 2px; }
 
-        .exercise-list { padding: 10px; flex: 1; display: flex; flex-direction: column; gap: 8px; justify-content: flex-start; }
+        .exercise-list { padding: 6px; flex: 1; display: flex; flex-direction: column; gap: 4px; justify-content: flex-start; }
         
         .exercise { 
-            display: flex; align-items: center; padding: 8px 10px; 
-            background: #f8f9fa; border-radius: 8px; font-size: 15px;
-            border: 1px solid rgba(0,0,0,0.05);
+            display: flex; align-items: center; padding: 4px 8px; 
+            background: #f8f9fa; border-radius: 6px; font-size: 14px;
+            border: 1px solid rgba(0,0,0,0.03);
         }
         
-        .container.many-days .exercise { font-size: 12px; padding: 6px 8px; }
-        .container.many-days .day-title { font-size: 16px; }
-        .container.many-days .exercise-list { gap: 6px; }
+        .container.many-days .exercise { font-size: 11px; padding: 3px 6px; }
+        .container.many-days .day-title { font-size: 14px; }
 
-        .exercise-num { background: var(--accent-color); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-left: 10px; flex-shrink: 0; font-weight: 900; }
-        .exercise-name { flex: 1; font-weight: 900; color: #000; letter-spacing: -0.5px; }
-        .exercise-sets { background: var(--gold-color); color: white; padding: 3px 12px; border-radius: 15px; font-size: 12px; font-weight: 900; min-width: 75px; text-align: center; }
+        .exercise-num { background: var(--accent-color); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-left: 8px; flex-shrink: 0; font-weight: 900; }
+        .exercise-name { flex: 1; font-weight: 900; color: #000; letter-spacing: -0.3px; }
+        .exercise-sets { background: var(--gold-color); color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 900; min-width: 65px; text-align: center; }
 
-        .footer { height: 35px; border-top: 1px solid #eee; padding-top: 5px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666; padding: 0 10px; }
+        .footer { height: 30px; border-top: 1px solid #eee; padding-top: 3px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #666; padding: 0 10px; }
         .footer strong { color: var(--accent-color); }
 
         .controls { display: flex; gap: 10px; margin-bottom: 15px; }
@@ -113,7 +113,7 @@
 
         <div class="footer">
             <div>الكابتن: <strong>ابو العز</strong></div>
-            <div style="font-size: 9px; opacity: 0.5;">v1.9 - Extra Bold</div>
+            <div style="font-size: 8px; opacity: 0.5;">v1.10 - Agility Compact Fix</div>
             <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
@@ -149,9 +149,8 @@
     </div>
 
     <script>
-        const STORAGE_KEY = 'gym_r_v1.9';
+        const STORAGE_KEY = 'gym_r_v1.10';
         const ORDINAL_AR = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن", "التاسع", "العاشر"];
-
         const ORIGINAL_DATA = {
             month: "الشهر الأول",
             days: [
