@@ -28,4 +28,4 @@ A collection of organized workout schedules for building and agility phases.
 3. Use the print button to get a physical copy of the schedule.
 
 ---
-© 2024 Al-Zab Sports Hall.
+© 2026 Al-Zab Sports Hall.
