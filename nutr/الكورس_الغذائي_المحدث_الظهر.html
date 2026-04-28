@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الكورس الغذائي المحدث - الظهر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --accent-color: #1e3799; --gold-color: #d4af37; }
+        @page { size: A4 portrait; margin: 0; }
+        html, body { margin: 0; padding: 0; font-family: 'Cairo', sans-serif; background: #dfe6e9; }
+        @media print { html, body { background: white; } .container { margin:0 !important; border: 3px solid var(--accent-color) !important; padding: 4mm !important; } .print-btn { display:none; } }
+        .container { width: 210mm; height: 297mm; background: white; border: 4px solid var(--accent-color); padding: 5mm; display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3.5px solid var(--gold-color); padding-bottom: 2px; margin-bottom: 5px; height: 40px; flex-shrink: 0; }
+        .gym-name { font-size: 18px; font-weight: 900; color: var(--accent-color); }
+        .tables-container { display: flex; flex-direction: column; gap: 4px; flex: 1; overflow: hidden; }
+        .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; flex: 1.2; min-height: 0; }
+        .category-card { border: 1.2px solid #bdc3c7; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; background: #fff; }
+        .category-title { background: var(--accent-color); color: white; padding: 2px; text-align: center; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 4px; flex-shrink: 0; }
+        .category-img { height: 12px; width: 12px; filter: brightness(0) invert(1); }
+        
+        table { width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; display: flex; flex-direction: column; flex: 1; }
+        thead { display: block; border-bottom: 2px solid var(--gold-color); background: #f8f9fa; }
+        tbody { display: flex; flex-direction: column; flex: 1; justify-content: space-around; }
+        tr { display: flex; width: 100%; border-bottom: 0.8px solid #eee; flex: 1; align-items: center; }
+        th, td { padding: 1px 4px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: 100%; }
+        th { color: var(--accent-color); font-weight: 900; height: 20px; font-size: 12px; }
+        td { font-weight: 700; color: #2d3436; font-size: 10.2px; }
+        td:nth-child(1), th:nth-child(1) { justify-content: flex-start; text-align: right; padding-right: 10px; color: #1e3799; }
+        
+        .tracking-table table { display: table !important; height: auto !important; }
+        .tracking-table thead, .tracking-table tbody, .tracking-table tr, .tracking-table th, .tracking-table td { display: table-cell !important; vertical-align: middle !important; border: 1px solid #bbb; text-align: center !important; }
+        .tracking-table tr { display: table-row !important; }
+        
+        .notes-box { font-size: 12px; font-weight: 800; background: #fff3cd; padding: 4px; border-radius: 6px; border: 1.5px dashed #ffeeba; text-align: center; }
+        .footer-note { text-align: center; font-size: 10.5px; font-weight: 800; padding: 2px; background: #f8f9fa; border-top: 2px solid #ccc; flex-shrink: 0; display: flex; justify-content: center; gap: 20px; color: #555; }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div style="display:flex; align-items:center; gap:6px;"><img src="LOGOz.png" alt="Logo" style="height:32px;" onerror="this.style.display='none'"><div class="gym-name">قاعة الزاب الرياضية</div></div>
+            <div style="color:var(--accent-color); font-weight:900; font-size:14px;">🗓️ مراجعة الكورس والقاعة كل يوم سبت</div>
+            <button type="button" class="print-btn" onclick="window.print()">طباعة 🖨️</button>
+        </div>
+        <div class="tables-container">
+            <div class="cards-grid">            <!-- Hot Drinks -->
+            <div class="category-card">
+                <div class="category-title" style="font-size: 12px;"><img src="icons/hot_drinks_icon.png" alt="Hot Drinks" class="category-img" onerror="this.style.display='none'"> المشروبات الحارة</div>
+                <table>
+                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody>
+                        <tr><td style='width: 58%;'>حليب بودرة (Nido)</td><td style='width: 27%;'>م.أ (12غ)</td><td style='width: 15%;'>60</td></tr>
+                        <tr><td style='width: 58%;'>شاي سادة</td><td style='width: 27%;'>كوب (180مل)</td><td style='width: 15%;'>5</td></tr>
+                        <tr><td style='width: 58%;'>قهوة + ستيفيا</td><td style='width: 27%;'>كوب (180مل)</td><td style='width: 15%;'>5</td></tr>
+                        <tr><td style='width: 58%;'>قهوة سادة</td><td style='width: 27%;'>كوب (180مل)</td><td style='width: 15%;'>5</td></tr>
+                        <tr><td style='width: 58%;'>كاكاو خالي السكر</td><td style='width: 27%;'>م.أ (5غ)</td><td style='width: 15%;'>10</td></tr>
+                        <tr><td style='width: 58%;'>نسكافيه جاف</td><td style='width: 27%;'>م.ص (2غ)</td><td style='width: 15%;'>5</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Cold Drinks -->
+            <div class="category-card">
+                <div class="category-title" style="font-size: 12px;"><img src="icons/cold_drinks_icon.png" alt="Cold Drinks" class="category-img" onerror="this.style.display='none'"> المشروبات الباردة</div>
+                <table>
+                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody>
+                        <tr><td style='width: 58%;'>بيبسي / كولا</td><td style='width: 27%;'>علبة (355مل)</td><td style='width: 15%;'>150</td></tr>
+                        <tr><td style='width: 58%;'>ريد بول</td><td style='width: 27%;'>علبة (250مل)</td><td style='width: 15%;'>110</td></tr>
+                        <tr><td style='width: 58%;'>عصير برتقال طازج</td><td style='width: 27%;'>كوب (240مل)</td><td style='width: 15%;'>110</td></tr>
+                        <tr><td style='width: 58%;'>عصير صناعي معبأ</td><td style='width: 27%;'>كوب (240مل)</td><td style='width: 15%;'>115</td></tr>
+                        <tr><td style='width: 58%;'>عصير مانجو طازج</td><td style='width: 27%;'>كوب (240مل)</td><td style='width: 15%;'>150</td></tr>
+                        <tr><td style='width: 58%;'>ماء</td><td style='width: 27%;'>أي كمية</td><td style='width: 15%;'>5</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Dairy -->
+            <div class="category-card">
+                <div class="category-title" style="font-size: 12px;"><img src="icons/dairy_icon.png" alt="Dairy" class="category-img" onerror="this.style.display='none'"> مصادر الألبان</div>
+                <table>
+                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody>
+                        <tr><td style='width: 58%;'>جبن شيدر</td><td style='width: 27%;'>م.أ מבشور (7غ)</td><td style='width: 15%;'>30</td></tr>
+                        <tr><td style='width: 58%;'>جبن كيري / معالج</td><td style='width: 27%;'>قطعة (15غ)</td><td style='width: 15%;'>45</td></tr>
+                        <tr><td style='width: 58%;'>حليب خالي الدسم</td><td style='width: 27%;'>كوب (240مل)</td><td style='width: 15%;'>80</td></tr>
+                        <tr><td style='width: 58%;'>حليب خفيف الدسم (2%)</td><td style='width: 27%;'>كوب (240مل)</td><td style='width: 15%;'>120</td></tr>
+                        <tr><td style='width: 58%;'>حليب كامل الدسم</td><td style='width: 27%;'>كوب (240مل)</td><td style='width: 15%;'>145</td></tr>
+                        <tr><td style='width: 58%;'>زبادي يوناني</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>15</td></tr>
+                        <tr><td style='width: 58%;'>قيمر / كريمة</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>50</td></tr>
+                        <tr><td style='width: 58%;'>لبن زبادي كامل الدسم</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>10</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Nuts -->
+            <div class="category-card">
+                <div class="category-title" style="font-size: 12px;"><img src="icons/nuts_icon.png" alt="Nuts" class="category-img" onerror="this.style.display='none'"> المكسرات غير المحمصة</div>
+                <table>
+                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody>
+                        <tr><td style='width: 58%;'>جوز جمل</td><td style='width: 27%;'>3 أنصاف (7.5غ)</td><td style='width: 15%;'>50</td></tr>
+                        <tr><td style='width: 58%;'>حب شمس مقشّر</td><td style='width: 27%;'>حفنة صغيرة (8غ)</td><td style='width: 15%;'>45</td></tr>
+                        <tr><td style='width: 58%;'>سمسم</td><td style='width: 27%;'>م.أ (9غ)</td><td style='width: 15%;'>50</td></tr>
+                        <tr><td style='width: 58%;'>فستق حلبي</td><td style='width: 27%;'>12 حبة (9غ)</td><td style='width: 15%;'>50</td></tr>
+                        <tr><td style='width: 58%;'>فول سوداني</td><td style='width: 27%;'>14 حبة (9غ)</td><td style='width: 15%;'>50</td></tr>
+                        <tr><td style='width: 58%;'>كاجو</td><td style='width: 27%;'>7-8 حبات (9.5غ)</td><td style='width: 15%;'>55</td></tr>
+                        <tr><td style='width: 58%;'>لوز</td><td style='width: 27%;'>6-7 حبات (8غ)</td><td style='width: 15%;'>45</td></tr>
+                    </tbody>
+                </table>
+            </div>
+</div>
+            
+            <div class="category-card" style="flex: 2; border: 2px solid var(--accent-color);">
+                <div class="category-title" style="background: var(--gold-color); color: #1a1a1a; font-size: 14px; padding: 4px;">🗓️ جدول المتابعة الدورية (12 أسبوع)</div>
+                <table style="display: table; width: 100%; border-collapse: collapse; font-size: 10.5px;">
+                    <thead style="display: table-header-group;">
+                        <tr style="display: table-row;">
+                            <th style="width: 35%; background: #ececec; border: 1px solid #999; height: 18px;">الفترة</th>
+                            <th style="width: 30%; background: #dfe6e9; border: 1px solid #999;">السعرات</th>
+                            <th style="width: 35%; background: #fab1a0; border: 1px solid #999;">وزن الجسم</th>
+                        </tr>
+                    </thead>
+                    <tbody style="display: table-row-group;">
+                        <tr style="display: table-row;   height: 16px;"><td>الأسبوع 1</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 2</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 3</td><td></td><td></td></tr>
+<tr style="display: table-row; background: #74b9ff; color: white; font-weight: 900; height: 16px;"><td>الأسبوع 4 (الشهر الأول)</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 5</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 6</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 7</td><td></td><td></td></tr>
+<tr style="display: table-row; background: #74b9ff; color: white; font-weight: 900; height: 16px;"><td>الأسبوع 8 (الشهر الثاني)</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 9</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 10</td><td></td><td></td></tr>
+<tr style="display: table-row;   height: 16px;"><td>الأسبوع 11</td><td></td><td></td></tr>
+<tr style="display: table-row; background: #ff7675; color: white; font-weight: 900; height: 16px;"><td>الأسبوع 12 (الشهر الثالث - النهائي)</td><td></td><td></td></tr>
+
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="notes-box" style="flex-shrink:0;">
+                <div style="color:#1e3799; font-size: 13px; margin-bottom: 2px; font-weight: 800;">📐 مفاتيح الكميات:</div>
+                <div style="font-weight: 700; font-size: 10.5px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+                    <span>• م.أ = ملعقة أكل</span>
+                    <span>• م.ص = ملعقة صغيرة</span>
+                    <span>• كوب = 240 مل</span>
+                    <span>• حجم اليد = ~100 غ</span>
+                    <span>• حبة = حبة مفردة</span>
+                    <span style="color:red; font-weight:900;">• المراجعة كل سبت</span>
+                </div>
+            </div>
+            <div class="footer-note">
+                <span>المصادر العلمية: USDA (قاعدة بيانات وزارة الزراعة الأمريكية) | Codex (هيئة دستور الأغذية)</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
