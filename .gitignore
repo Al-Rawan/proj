@@ -9,3 +9,5 @@ Thumbs.db
 # Local configuration
 mcp_config.json
 .env
+
+.gitignore
