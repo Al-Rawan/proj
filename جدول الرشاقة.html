@@ -8,7 +8,7 @@
     <style>
         :root {
             --primary-color: #1a1a1a;
-            --accent-color: #1e3799;
+            --accent-color: #1e3799; /* العودة للون الأصلي */
             --gold-color: #d4af37;
             --border-color: #d1d8e0;
             --bg-color: #ffffff;
@@ -19,591 +19,222 @@
             margin: 0mm !important; 
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100vh;
-            background-color: #f1f2f6;
-            font-family: 'Cairo', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            overflow: auto;
-            padding: 20px 0;
-        }
-
-        @media screen {
-            .container {
-                zoom: 0.9;
-            }
-        }
-
-        @media screen and (max-width: 250mm) {
-            .container {
-                zoom: 0.8;
-            }
-        }
-
-        @media print {
-            html, body {
-                width: 297mm !important;
-                height: 210mm !important;
-                overflow: hidden !important;
-                background: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            body {
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-            }
-            .container {
-                border: none !important;
-                box-shadow: none !important;
-                margin: 0 auto !important;
-                padding: 0 !important;
-                width: 285mm !important;
-                height: 198mm !important;
-                background: white !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: space-between !important;
-                box-sizing: border-box !important;
-            }
-            .header, .footer {
-                padding: 0 10mm !important;
-            }
-            .days-container {
-                display: grid !important;
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
-                gap: 5px !important;
-                flex: 1 !important;
-                padding: 0 10mm !important;
-                box-sizing: border-box !important;
-            }
-            .day-card {
-                break-inside: avoid !important;
-                font-size: 0.9em !important;
-            }
-            .edit-btn, .print-btn, .action-buttons, .version, .setup-buttons {
-                display: none !important;
-            }
-            .header { margin-bottom: 5px !important; }
-            .footer { margin-top: 5px !important; }
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
+            background-color: #f1f2f6; font-family: 'Cairo', sans-serif;
+            display: flex; flex-direction: column; align-items: center; padding: 20px 0;
         }
 
         .container {
-            width: 280mm;
-            height: 195mm;
-            min-width: 280mm;
-            min-height: 195mm;
-            background-color: var(--bg-color);
-            border: 1px solid #ccc;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            width: 280mm; height: 195mm;
+            background-color: var(--bg-color); border: 1px solid #ccc;
+            padding: 10px; display: flex; flex-direction: column;
+            position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            overflow: hidden; /* لمنع الخروج عن الحدود */
+        }
+
+        @media print {
+            html, body { background: white !important; padding: 0 !important; }
+            .container { border: none !important; box-shadow: none !important; margin: 0 !important; }
+            .no-print { display: none !important; }
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--gold-color);
-            padding-bottom: 5px;
-            margin-bottom: 6px;
-            height: 45px;
-            flex-shrink: 0;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--gold-color); padding-bottom: 5px; margin-bottom: 10px;
+            height: 50px; flex-shrink: 0;
         }
 
-        .gym-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 2px solid #eee;
-            padding-left: 15px;
-            margin-left: 15px;
-            flex-shrink: 0;
-        }
-
-        .logo-img {
-            height: 45px;
-            width: auto;
-            flex-shrink: 0;
-        }
-
-        .gym-name {
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--accent-color);
-            white-space: nowrap;
-        }
-
-        .plan-info {
-            display: flex;
-            gap: 15px;
-            font-size: 15px;
-            font-weight: 700;
-            color: #2d3436;
-            flex-grow: 1;
-            justify-content: flex-start;
-            padding-right: 30px;
-        }
-
-        .info-item {
-            color: var(--accent-color);
-        }
-
-        .version {
-            text-align: center;
-            color: #999;
-            margin-bottom: 5px;
-            font-size: 0.75em;
-        }
+        .gym-name { font-size: 22px; font-weight: 900; color: var(--accent-color); }
 
         .days-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            flex: 1;
+            display: grid; gap: 8px; flex: 1; min-height: 0;
+            /* سيتم التحكم في عدد الأعمدة عبر الجافا سكريبت */
         }
 
         .day-card {
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            border: 1px solid var(--border-color); border-radius: 8px;
+            display: flex; flex-direction: column; background: #fff;
+            min-width: 0; /* مهم للسماح بالتقلص */
         }
 
         .day-title {
-            background: var(--accent-color);
-            color: white;
-            padding: 8px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            flex-shrink: 0;
+            background: var(--accent-color); color: white; padding: 8px;
+            text-align: center; font-size: 18px; font-weight: 700;
         }
 
-        .warmup {
-            background: #fff3cd;
-            padding: 4px 5px;
-            border-bottom: 2px solid var(--gold-color);
-        }
+        .warmup { background: #fff3cd; padding: 5px; border-bottom: 1px solid var(--gold-color); }
+        .warmup-title { color: #856404; font-weight: 700; font-size: 14px; }
 
-        .warmup-title {
-            color: #856404;
-            font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 3px;
-        }
-
-        .exercise-list {
-            padding: 4px 5px;
-        }
-
-        .exercise-header {
-            display: flex;
-            align-items: center;
-            padding: 4px 6px;
-            background: var(--accent-color);
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 4px;
-            border-radius: 3px;
-        }
-
-        .exercise-header .header-num {
-            width: 20px;
-            margin-left: 5px;
-            text-align: center;
-        }
-
-        .exercise-header .header-name {
-            flex: 1;
-        }
-
-        .exercise-header .header-sets {
-            width: 70px;
-            text-align: center;
-        }
-
+        .exercise-list { padding: 5px; flex: 1; overflow: hidden; }
+        
         .exercise {
-            display: flex;
-            align-items: center;
-            padding: 2px 4px;
-            margin-bottom: 2px;
-            background: #f8f9fa;
-            border-radius: 3px;
-            font-size: 16px;
+            display: flex; align-items: center; padding: 3px 5px; margin-bottom: 3px;
+            background: #f8f9fa; border-radius: 4px; font-size: 14px;
         }
+
+        /* تصغير الخط تلقائياً عند زيادة عدد الأيام */
+        .container.many-days .exercise-name { font-size: 12px; }
+        .container.many-days .day-title { font-size: 16px; }
 
         .exercise-num {
-            background: var(--accent-color);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            margin-left: 6px;
-            flex-shrink: 0;
+            background: var(--accent-color); color: white; width: 20px; height: 20px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 11px; margin-left: 5px; flex-shrink: 0;
         }
 
-        .exercise-name {
-            flex: 1;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 16px;
-        }
-
-        .exercise-sets {
-            background: var(--gold-color);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 12px;
-        }
+        .exercise-name { flex: 1; font-weight: 600; }
+        .exercise-sets { background: var(--gold-color); color: white; padding: 1px 6px; border-radius: 10px; font-size: 11px; font-weight: 700; }
 
         .footer {
-            height: 28px;
-            margin-top: 5px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 10px;
-            flex-shrink: 0;
-            color: #636e72;
-            padding-left: 10px;
-            padding-right: 10px;
+            height: 30px; border-top: 1px solid #eee; padding-top: 5px;
+            display: flex; justify-content: space-between; font-size: 12px; color: #666;
         }
 
-        .footer strong {
-            color: var(--accent-color);
+        /* Buttons and Controls */
+        .controls { display: flex; gap: 10px; margin-bottom: 15px; }
+        .btn {
+            padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;
+            font-family: 'Cairo'; font-weight: 700; color: white; transition: 0.3s;
         }
+        .btn-edit { background: var(--gold-color); }
+        .btn-print { background: var(--accent-color); }
+        .btn-add { background: #28a745; }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        .setup-buttons {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 10px;
-            justify-content: center;
-        }
-
-        .setup-btn {
-            background: #636e72;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-family: 'Cairo';
-        }
-
-        .setup-btn:hover { background: var(--primary-color); }
-
-        /* Modal Styles */
+        /* Modal Edit */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); align-items: center; justify-content: center;
         }
-
         .modal.active { display: flex; }
-
         .modal-content {
-            background: white;
-            width: 95%;
-            max-width: 1000px;
-            height: 90vh;
-            border-radius: 15px;
-            display: flex;
-            overflow: hidden;
+            background: white; width: 90%; max-width: 900px; height: 85vh; border-radius: 15px;
+            display: flex; overflow: hidden;
         }
-
-        .modal-sidebar {
-            width: 220px;
-            background: var(--accent-color);
-            color: white;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
+        .sidebar { width: 200px; background: #2c3e50; color: white; padding: 20px; }
+        .main-edit { flex: 1; padding: 25px; overflow-y: auto; }
+        .day-select-btn {
+            width: 100%; padding: 10px; margin-bottom: 5px; border: none; background: rgba(255,255,255,0.1);
+            color: white; text-align: right; cursor: pointer; border-radius: 5px; font-family: 'Cairo';
         }
+        .day-select-btn.active { background: var(--gold-color); }
 
-        .modal-main {
-            flex: 1;
-            padding: 25px;
-            overflow-y: auto;
-        }
-
-        .day-btn {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 10px;
-            margin-bottom: 8px;
-            width: 100%;
-            text-align: right;
-            cursor: pointer;
-            border-radius: 5px;
-            font-family: 'Cairo';
-        }
-
-        .day-btn.active { background: var(--gold-color); border-color: var(--gold-color); }
-
-        .add-day-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: auto;
-            font-family: 'Cairo';
-            font-weight: 700;
-        }
-
-        .exercise-editor {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-            align-items: center;
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .exercise-editor input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Cairo';
-        }
-
-        .exercise-editor .name-input { flex: 2; }
-        .exercise-editor .sets-input { flex: 1; }
-
-        .save-btn {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 8px;
-            font-family: 'Cairo';
-            font-weight: 900;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .delete-day-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Cairo';
-            font-size: 12px;
-            margin-top: 5px;
-        }
+        .edit-row { display: flex; gap: 10px; margin-bottom: 8px; align-items: center; }
+        .edit-row input { padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Cairo'; }
     </style>
 </head>
 <body>
-    <div class="setup-buttons">
-        <button class="setup-btn" onclick="exportData()">📥 تصدير ملف النسخة الاحتياطية</button>
-        <button class="setup-btn" onclick="importData()">📤 استعادة نسخة احتياطية</button>
-        <button class="setup-btn" onclick="resetToDefault()" style="background:#dc3545">🔄 إعادة تعيين للضبط الأصلي</button>
+
+    <div class="controls no-print">
+        <button class="btn btn-edit" onclick="openModal()">✏️ تعديل الجدول</button>
+        <button class="btn btn-add" onclick="addNewDay()">➕ إضافة يوم جديد</button>
+        <button class="btn btn-print" onclick="window.print()">🖨️ طباعة الجدول</button>
+        <button class="btn" style="background:#636e72" onclick="exportData()">💾 نسخة احتياطية</button>
+        <button class="btn" style="background:#dc3545" onclick="resetData()">🔄 إعادة ضبط</button>
     </div>
 
-    <div class="container" id="mainContainer">
+    <div class="container" id="mainWrapper">
         <div class="header">
-            <div class="gym-info">
-                <img src="LOGOz.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-                <div class="gym-name">قاعة الزاب الرياضية</div>
-            </div>
-
-            <div class="plan-info">
-                <div class="info-item">📋 جدول الرشاقة - <span id="planMonth" contenteditable="true" onblur="saveMonth()">الشهر الأول</span></div>
-                <div class="action-buttons">
-                    <button class="setup-btn" onclick="openEditModal()" style="font-size: 20px; background: var(--gold-color);">✏️ تعديل</button>
-                    <button class="setup-btn" onclick="window.print()" style="font-size: 20px; background: var(--accent-color);">🖨️ طباعة</button>
-                </div>
-            </div>
+            <div class="gym-name">قاعة الزاب الرياضية</div>
+            <div style="font-weight: 700; color: var(--accent-color);">📋 جدول الرشاقة - <span id="monthName" contenteditable="true">الشهر الأول</span></div>
+            <img src="LOGOz.png" height="40" onerror="this.style.display='none'">
         </div>
 
-        <div class="version">الإصدار الديناميكي v1.0</div>
-
-        <div class="days-container" id="daysWrapper">
-            <!-- سيتم توليد الأيام هنا برمجياً -->
+        <div class="days-container" id="daysDisplay">
+            <!-- سيتم توليد الأيام هنا -->
         </div>
 
         <div class="footer">
-            <div class="footer-right">الكابتن: <strong>ابو العز</strong></div>
-            <div class="footer-left">مدير القاعة: <strong>عمر عبدالواحد</strong></div>
+            <div>الكابتن: <strong>ابو العز</strong></div>
+            <div style="font-size: 9px;">v1.1 - نظام الأيام الذكي</div>
+            <div>مدير القاعة: <strong>عمر عبدالواحد</strong></div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="editModal" class="modal">
+    <!-- Modal Edit -->
+    <div class="modal" id="editModal">
         <div class="modal-content">
-            <div class="modal-sidebar">
+            <div class="sidebar">
                 <h3>الأيام</h3>
-                <div id="daysList"></div>
-                <button class="add-day-btn" onclick="addNewDay()">➕ إضافة يوم جديد</button>
-                <button class="setup-btn" onclick="closeEditModal()" style="margin-top:10px; background:#636e72">إغلاق</button>
+                <div id="sidebarDays"></div>
+                <button class="btn btn-add" style="width:100%; margin-top:20px;" onclick="addNewDay()">➕ إضافة يوم</button>
+                <button class="btn" style="width:100%; margin-top:10px; background:#e74c3c" onclick="closeModal()">إغلاق</button>
             </div>
-            <div class="modal-main">
-                <h2 id="currentDayTitle">اليوم الأول</h2>
-                <button class="delete-day-btn" id="deleteDayBtn" onclick="deleteCurrentDay()">🗑️ حذف هذا اليوم</button>
+            <div class="main-edit">
+                <h2 id="editDayTitle">تعديل اليوم</h2>
+                <button class="btn" style="background:#c0392b; font-size:12px; margin-bottom:15px;" onclick="deleteCurrentDay()">🗑️ حذف هذا اليوم</button>
                 
-                <h3 style="margin: 20px 0 10px; color: var(--accent-color);">🔥 تمارين الإحماء</h3>
-                <div id="warmupEditor"></div>
-                <button class="setup-btn" onclick="addExercise('warmup')">➕ إضافة إحماء</button>
+                <h4 style="color: var(--accent-color); margin-bottom:10px;">🔥 تمارين الإحماء</h4>
+                <div id="warmupList"></div>
+                <button class="btn" style="background:#f39c12; font-size:12px;" onclick="addItem('warmup')">➕ إضافة إحماء</button>
 
-                <h3 style="margin: 20px 0 10px; color: var(--accent-color);">🏋️ التمارين الرئيسية</h3>
-                <div id="exerciseEditor"></div>
-                <button class="setup-btn" onclick="addExercise('main')">➕ إضافة تمرين</button>
+                <h4 style="color: var(--accent-color); margin:20px 0 10px;">🏋️ التمارين الأساسية</h4>
+                <div id="mainList"></div>
+                <button class="btn" style="background:#2980b9; font-size:12px;" onclick="addItem('main')">➕ إضافة تمرين</button>
 
-                <button class="save-btn" onclick="saveAll()">💾 حفظ كافة التغييرات</button>
+                <div style="margin-top:30px; border-top:1px solid #eee; padding-top:20px;">
+                    <button class="btn" style="background:var(--accent-color); width:100%; padding:15px;" onclick="saveAndClose()">💾 حفظ واعتماد التغييرات</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        const DEFAULT_DATA = {
-            month: "الشهر الأول",
+        const INITIAL_DATA = {
             days: [
                 {
                     title: "اليوم الأول",
-                    warmup: [
-                        {name: "جري", sets: "5د"},
-                        {name: "لابتكل", sets: "5د"},
-                        {name: "بايسكل ثابت", sets: "5د"},
-                        {name: "تويست واقف", sets: "5د"},
-                        {name: "رفع جذع", sets: "4x10"},
-                        {name: "رفع ساق", sets: "3x10"},
-                        {name: "دبني هوائي", sets: "5x10"}
-                    ],
-                    main: [
-                        {name: "بنج مستوي", sets: "3x10"},
-                        {name: "بنج اعلى", sets: "3x10"},
-                        {name: "بنج سفلي", sets: "3x10"},
-                        {name: "سحب خلفي", sets: "3x10"},
-                        {name: "سحب امامي", sets: "3x10"},
-                        {name: "فراشة جهاز", sets: "3x10"},
-                        {name: "ترايسيبس حبل", sets: "3x10"}
-                    ]
+                    warmup: [{name: "جري", sets: "5د"}, {name: "لابتكل", sets: "5د"}, {name: "تويست", sets: "5د"}],
+                    main: [{name: "بنج مستوي", sets: "3x10"}, {name: "بنج اعلى", sets: "3x10"}, {name: "سحب خلفي", sets: "3x10"}]
                 },
                 {
                     title: "اليوم الثاني",
-                    warmup: [
-                        {name: "جري", sets: "5د"},
-                        {name: "لابتكل", sets: "5د"},
-                        {name: "بايسكل ثابت", sets: "5د"},
-                        {name: "تويست واقف", sets: "5د"},
-                        {name: "رفع جذع", sets: "4x10"},
-                        {name: "رفع ساق", sets: "3x10"},
-                        {name: "دبني هوائي", sets: "5x10"},
-                        {name: "بلانك", sets: "3x30ث"}
-                    ],
-                    main: [
-                        {name: "سحب خلفي", sets: "3x10"},
-                        {name: "سحب امامي", sets: "3x10"},
-                        {name: "سحب شيفت", sets: "3x10"},
-                        {name: "همر", sets: "3x10"},
-                        {name: "بايسيبس شيفت", sets: "3x10"},
-                        {name: "بايسيبس دمبلص", sets: "3x10"}
-                    ]
+                    warmup: [{name: "بايسكل", sets: "5د"}, {name: "تويست", sets: "5د"}],
+                    main: [{name: "سحب امامي", sets: "3x10"}, {name: "همر", sets: "3x10"}, {name: "باي شيفت", sets: "3x10"}]
                 },
                 {
                     title: "اليوم الثالث",
-                    warmup: [
-                        {name: "جري", sets: "5د"},
-                        {name: "لابتكل", sets: "5د"},
-                        {name: "بايسكل ثابت", sets: "5د"},
-                        {name: "تويست واقف", sets: "5د"},
-                        {name: "رفع جذع", sets: "4x10"},
-                        {name: "رفع ساق", sets: "3x10"},
-                        {name: "دبني هوائي", sets: "5x10"}
-                    ],
-                    main: [
-                        {name: "باي شيفت", sets: "3x10"},
-                        {name: "باي دمبلص", sets: "3x10"},
-                        {name: "همر دمبلص", sets: "3x10"},
-                        {name: "ترايسيبس حبل", sets: "3x10"},
-                        {name: "ترايسيبس شيفت", sets: "3x10"},
-                        {name: "كرنش معدة", sets: "3x15"}
-                    ]
+                    warmup: [{name: "جري", sets: "5د"}, {name: "شناو", sets: "3x10"}],
+                    main: [{name: "همر دمبلص", sets: "3x10"}, {name: "تراي حبل", sets: "3x10"}, {name: "معدة", sets: "3x15"}]
                 }
             ]
         };
 
-        let appData = JSON.parse(localStorage.getItem('agility_v2')) || JSON.parse(JSON.stringify(DEFAULT_DATA));
-        let activeDayIndex = 0;
+        let schedule = JSON.parse(localStorage.getItem('gym_agility_v1.1')) || JSON.parse(JSON.stringify(INITIAL_DATA));
+        let activeIndex = 0;
 
-        function init() {
-            document.getElementById('planMonth').textContent = appData.month;
-            renderView();
-        }
-
-        function renderView() {
-            const wrapper = document.getElementById('daysWrapper');
-            // ضبط عدد الأعمدة بناءً على عدد الأيام
-            wrapper.style.gridTemplateColumns = `repeat(${appData.days.length}, 1fr)`;
+        function render() {
+            const container = document.getElementById('daysDisplay');
+            const wrapper = document.getElementById('mainWrapper');
+            const count = schedule.days.length;
             
-            wrapper.innerHTML = appData.days.map((day, dIdx) => `
+            // ضبط عدد الأعمدة
+            container.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+            
+            // تصغير الخطوط إذا زاد عدد الأيام عن 3
+            if (count > 3) wrapper.classList.add('many-days');
+            else wrapper.classList.remove('many-days');
+
+            container.innerHTML = schedule.days.map((day, i) => `
                 <div class="day-card">
                     <div class="day-title">${day.title}</div>
                     <div class="warmup">
                         <div class="warmup-title">🔥 الإحماء</div>
-                        <div class="exercise-list">
-                            ${day.warmup.map((ex, i) => `
-                                <div class="exercise">
-                                    <div class="exercise-num">${i + 1}</div>
-                                    <div class="exercise-name">${ex.name}</div>
-                                    <div class="exercise-sets">${ex.sets}</div>
-                                </div>
-                            `).join('')}
-                        </div>
+                        ${day.warmup.map((ex, j) => `
+                            <div class="exercise">
+                                <div class="exercise-num">${j+1}</div>
+                                <div class="exercise-name">${ex.name}</div>
+                                <div class="exercise-sets">${ex.sets}</div>
+                            </div>
+                        `).join('')}
                     </div>
                     <div class="exercise-list">
-                        <div class="exercise-header">
-                            <div class="header-num">#</div>
-                            <div class="header-name">التمارين</div>
-                            <div class="header-sets">الجولات</div>
-                        </div>
-                        ${day.main.map((ex, i) => `
+                        ${day.main.map((ex, j) => `
                             <div class="exercise">
-                                <div class="exercise-num">${i + 1}</div>
+                                <div class="exercise-num">${j+1}</div>
                                 <div class="exercise-name">${ex.name}</div>
                                 <div class="exercise-sets">${ex.sets}</div>
                             </div>
@@ -613,133 +244,99 @@
             `).join('');
         }
 
-        function openEditModal() {
+        function openModal() {
             document.getElementById('editModal').classList.add('active');
-            renderModalSidebar();
-            selectDay(0);
+            updateSidebar();
+            loadDay(activeIndex);
         }
 
-        function closeEditModal() {
-            document.getElementById('editModal').classList.remove('active');
-        }
+        function closeModal() { document.getElementById('editModal').classList.remove('active'); }
 
-        function renderModalSidebar() {
-            const list = document.getElementById('daysList');
-            list.innerHTML = appData.days.map((day, i) => `
-                <button class="day-btn ${i === activeDayIndex ? 'active' : ''}" onclick="selectDay(${i})">${day.title}</button>
+        function updateSidebar() {
+            document.getElementById('sidebarDays').innerHTML = schedule.days.map((day, i) => `
+                <button class="day-select-btn ${i === activeIndex ? 'active' : ''}" onclick="loadDay(${i})">${day.title}</button>
             `).join('');
         }
 
-        function selectDay(index) {
-            activeDayIndex = index;
-            renderModalSidebar();
-            const day = appData.days[index];
-            document.getElementById('currentDayTitle').textContent = day.title;
+        function loadDay(index) {
+            activeIndex = index;
+            updateSidebar();
+            const day = schedule.days[index];
+            document.getElementById('editDayTitle').innerText = `تعديل: ${day.title}`;
             
-            renderEditor('warmup', 'warmupEditor');
-            renderEditor('main', 'exerciseEditor');
+            renderList('warmup', 'warmupList');
+            renderList('main', 'mainList');
         }
 
-        function renderEditor(type, containerId) {
-            const container = document.getElementById(containerId);
-            const data = appData.days[activeDayIndex][type];
-            
-            container.innerHTML = data.map((ex, i) => `
-                <div class="exercise-editor">
-                    <input type="text" class="name-input" value="${ex.name}" oninput="updateData('${type}', ${i}, 'name', this.value)">
-                    <input type="text" class="sets-input" value="${ex.sets}" oninput="updateData('${type}', ${i}, 'sets', this.value)">
-                    <button onclick="removeExercise('${type}', ${i})" style="color:red; background:none; border:none; cursor:pointer">❌</button>
+        function renderList(type, containerId) {
+            const list = schedule.days[activeIndex][type];
+            document.getElementById(containerId).innerHTML = list.map((item, i) => `
+                <div class="edit-row">
+                    <input type="text" style="flex:2" value="${item.name}" oninput="schedule.days[${activeIndex}].${type}[${i}].name=this.value">
+                    <input type="text" style="flex:1" value="${item.sets}" oninput="schedule.days[${activeIndex}].${type}[${i}].sets=this.value">
+                    <button onclick="removeItem('${type}', ${i})" style="border:none; background:none; cursor:pointer">❌</button>
                 </div>
             `).join('');
         }
 
-        function updateData(type, index, field, value) {
-            appData.days[activeDayIndex][type][index][field] = value;
+        function addItem(type) {
+            schedule.days[activeIndex][type].push({name: "جديد", sets: "3x10"});
+            renderList(type, type === 'warmup' ? 'warmupList' : 'mainList');
         }
 
-        function addExercise(type) {
-            appData.days[activeDayIndex][type].push({name: "تمرين جديد", sets: "3x10"});
-            renderEditor(type, type === 'warmup' ? 'warmupEditor' : 'exerciseEditor');
-        }
-
-        function removeExercise(type, index) {
-            appData.days[activeDayIndex][type].splice(index, 1);
-            renderEditor(type, type === 'warmup' ? 'warmupEditor' : 'exerciseEditor');
+        function removeItem(type, index) {
+            schedule.days[activeIndex][type].splice(index, 1);
+            renderList(type, type === 'warmup' ? 'warmupList' : 'mainList');
         }
 
         function addNewDay() {
-            const newNum = appData.days.length + 1;
-            const titles = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع"];
-            const title = `اليوم ${titles[newNum-1] || newNum}`;
-            
-            appData.days.push({
-                title: title,
-                warmup: JSON.parse(JSON.stringify(DEFAULT_DATA.days[0].warmup)),
-                main: []
+            const num = schedule.days.length + 1;
+            const titles = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
+            schedule.days.push({
+                title: `اليوم ${titles[num-1] || num}`,
+                warmup: [],
+                main: [{name: "تمرين جديد", sets: "3x10"}]
             });
-            activeDayIndex = appData.days.length - 1;
-            renderModalSidebar();
-            selectDay(activeDayIndex);
-        }
-
-        function deleteCurrentDay() {
-            if (appData.days.length <= 1) return alert("يجب أن يبقى يوم واحد على الأقل");
-            if (confirm("هل أنت متأكد من حذف هذا اليوم بالكامل؟")) {
-                appData.days.splice(activeDayIndex, 1);
-                activeDayIndex = 0;
-                renderModalSidebar();
-                selectDay(0);
+            activeIndex = schedule.days.length - 1;
+            render();
+            if (document.getElementById('editModal').classList.contains('active')) {
+                updateSidebar();
+                loadDay(activeIndex);
             }
         }
 
-        function saveAll() {
-            localStorage.setItem('agility_v2', JSON.stringify(appData));
-            renderView();
-            alert("✅ تم حفظ كافة التغييرات بنجاح في ذاكرة المتصفح!");
-            closeEditModal();
+        function deleteCurrentDay() {
+            if (schedule.days.length <= 1) return alert("يجب وجود يوم واحد على الأقل");
+            if (confirm("حذف اليوم بالكامل؟")) {
+                schedule.days.splice(activeIndex, 1);
+                activeIndex = 0;
+                loadDay(0);
+                render();
+            }
         }
 
-        function saveMonth() {
-            appData.month = document.getElementById('planMonth').textContent;
-            localStorage.setItem('agility_v2', JSON.stringify(appData));
+        function saveAndClose() {
+            localStorage.setItem('gym_agility_v1.1', JSON.stringify(schedule));
+            render();
+            closeModal();
         }
 
-        function resetToDefault() {
-            if (confirm("هل تريد حقاً العودة للإعدادات الأصلية؟ سيتم مسح كافة تعديلاتك.")) {
-                appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
-                localStorage.setItem('agility_v2', JSON.stringify(appData));
+        function resetData() {
+            if (confirm("إعادة الجداول الأصلية؟")) {
+                localStorage.removeItem('gym_agility_v1.1');
                 location.reload();
             }
         }
 
         function exportData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
-            const downloadAnchorNode = document.createElement('a');
-            downloadAnchorNode.setAttribute("href", dataStr);
-            downloadAnchorNode.setAttribute("download", "agility_schedule_backup.json");
-            document.body.appendChild(downloadAnchorNode);
-            downloadAnchorNode.click();
-            downloadAnchorNode.remove();
+            const data = JSON.stringify(schedule);
+            const blob = new Blob([data], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = "gym_schedule_backup.json"; a.click();
         }
 
-        function importData() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.onchange = e => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.readAsText(file, 'UTF-8');
-                reader.onload = readerEvent => {
-                    const content = readerEvent.target.result;
-                    appData = JSON.parse(content);
-                    localStorage.setItem('agility_v2', JSON.stringify(appData));
-                    location.reload();
-                }
-            }
-            input.click();
-        }
-
-        window.onload = init;
+        window.onload = render;
     </script>
 </body>
 </html>
