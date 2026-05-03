@@ -68,8 +68,10 @@ body {
 }
 
 .logo-img {
-    height: 35px;
-    filter: brightness(0) invert(1);
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 1.5px white) drop-shadow(0 0 1.5px white);
 }
 
 .gym-name {
