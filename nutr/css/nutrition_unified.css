@@ -1,0 +1,224 @@
+/* Nutrition Unified Print Style - Matches User Images */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+
+:root {
+    --primary-blue: #0072b8;
+    --accent-yellow: #fec300;
+    --text-dark: #1a1a1a;
+    --border-color: #ddd;
+}
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #fff;
+    color: var(--text-dark);
+    line-height: 1.2;
+    display: flex;
+    justify-content: center;
+}
+
+.a4-container {
+    width: 210mm;
+    height: 297mm;
+    padding: 2mm; /* Tiny margin before yellow border */
+    background: var(--accent-yellow); /* The thick outer border effect */
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-sheet {
+    background: white;
+    flex: 1;
+    padding: 3mm;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary-blue);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.gym-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-small {
+    height: 35px;
+    filter: brightness(0) invert(1);
+}
+
+.gym-name {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.page-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Alert Banner */
+.alert-banner {
+    display: flex;
+    justify-content: space-around;
+    padding: 3px;
+    background: #fdfdfd;
+    border: 1px solid var(--accent-yellow);
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+/* Grid for Categories */
+.grid-categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    flex: 1;
+}
+
+.category-card {
+    border: 1px solid var(--primary-blue);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-header {
+    background: var(--primary-blue);
+    color: white;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f1f1f1;
+    font-size: 9px;
+    padding: 2px;
+    border-bottom: 1px solid var(--primary-blue);
+}
+
+td {
+    font-size: 8.5px;
+    padding: 1px 4px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.food-name {
+    text-align: right;
+    font-weight: 800;
+    color: var(--primary-blue);
+}
+
+/* Bottom Sections */
+.bottom-sections {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.subscriber-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 4px 10px;
+    background: #f9f9f9;
+    border: 1.5px solid var(--primary-blue);
+    border-radius: 4px;
+}
+
+.info-item {
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.info-line {
+    border-bottom: 1px dotted #999;
+    display: inline-block;
+    width: 60%;
+    height: 12px;
+}
+
+.tracking-section {
+    border: 1.5px solid var(--primary-blue);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tracking-header {
+    background: var(--primary-blue);
+    color: white;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.tracking-table th, .tracking-table td {
+    font-size: 10px;
+    border: 1px solid #ddd;
+    padding: 2px;
+}
+
+.month-mark { background: #e3f2fd; font-weight: 900; }
+
+.legend-banner {
+    background: var(--accent-yellow);
+    padding: 2px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 9px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    border-radius: 4px;
+}
+
+.footer {
+    font-size: 8px;
+    text-align: center;
+    color: #888;
+    margin-top: 2px;
+}
+
+@media screen {
+    body { background: #555; padding: 20px; }
+    .a4-container { box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+}
+
+.no-print { display: none; }

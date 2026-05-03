@@ -1,24 +1,15 @@
-/* Nutrition Course Premium Styles */
+/* Nutrition Course - Classic Print Style matching User Images */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
 
 :root {
-    --primary-blue: #0077c2; /* More vibrant brand blue */
-    --primary-blue-dark: #0056b3;
-    --accent-gold: #ffcc00; /* More vibrant brand gold */
-    --accent-gold-dark: #ccaa00;
-    --health-green: #2ecc71;
-    --bg-light: #f4f7f6;
+    --primary-blue: #0072b8;
+    --accent-yellow: #fec300;
     --text-dark: #1a1a1a;
-    --text-muted: #555;
-    --glass-bg: rgba(255, 255, 255, 0.95);
-    --glass-border: rgba(0, 0, 0, 0.1);
-    --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    --transition: all 0.2s ease-in-out;
 }
 
 @page {
     size: A4 portrait;
-    margin: 10mm;
+    margin: 0;
 }
 
 * {
@@ -27,222 +18,124 @@
     box-sizing: border-box;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
 }
 
 body {
     font-family: 'Cairo', sans-serif;
-    background-color: #f1f2f6;
+    background-color: #fff;
     color: var(--text-dark);
-    line-height: 1.4;
+    line-height: 1.3;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     padding: 20px 0;
 }
 
-.container {
+.a4-page {
     width: 210mm;
     height: 297mm;
-    background: white;
-    position: relative;
-    padding: 10mm;
+    background: var(--accent-yellow); /* Thick Yellow Border */
+    padding: 6mm; /* Border thickness */
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 40px rgba(0,0,0,0.1);
-    border: 1px solid #ddd;
-    overflow: hidden;
 }
 
-@media print {
-    body { 
-        background: white; 
-        padding: 0; 
-        margin: 0;
-    }
-    .container { 
-        box-shadow: none; 
-        border: 1.5px solid #000;
-        width: 100%;
-        height: 100%;
-        padding: 8mm;
-        margin: 0;
-        position: static;
-    }
-    .no-print { display: none !important; }
+.inner-content {
+    background: white;
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header Styles */
+/* Header */
 .header {
-    background: var(--primary-blue);
-    color: white;
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: var(--card-shadow);
-    flex-shrink: 0;
+    background: var(--primary-blue);
+    color: white;
+    padding: 8px 20px;
+    margin-bottom: 10px;
 }
 
 .gym-brand {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .logo-img {
-    height: 50px;
-    background: white;
-    padding: 5px;
-    border-radius: 50%;
+    height: 40px;
+    filter: brightness(0) invert(1);
 }
 
 .gym-name {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 900;
 }
 
 .course-title {
     font-size: 18px;
     font-weight: 700;
-    opacity: 0.9;
 }
 
-/* Health Alert Banner */
+/* Alert Banner */
 .alert-banner {
-    background: linear-gradient(135deg, #fff3cd 0%, #fff9e6 100%);
-    border: 2px solid #ffeeba;
-    border-radius: 12px;
-    padding: 8px 12px;
-    margin-bottom: 12px;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    background: #fff;
+    border: 1px solid var(--primary-blue);
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
     font-weight: 800;
-    color: var(--primary-blue-dark);
-    font-size: 13px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    flex-shrink: 0;
-}
-
-.info-banner {
-    background: #e3f2fd;
-    border-color: #bbdefb;
-    margin-top: 10px;
-}
-
-/* Subscriber Info Section */
-.subscriber-info {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 15px;
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 1.5px solid #0077c2;
-}
-
-.info-field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.info-label {
-    font-size: 11px;
-    font-weight: 900;
     color: var(--primary-blue);
-}
-
-.info-value {
-    border-bottom: 1px dashed #999;
-    height: 22px;
 }
 
 /* Grid Layout */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
     flex: 1;
-    min-height: 0;
 }
 
-/* Glassmorphism Card Styles */
+/* Category Card */
 .category-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    overflow: hidden;
+    border: 1.5px solid var(--primary-blue);
     display: flex;
     flex-direction: column;
-    box-shadow: var(--card-shadow);
-    transition: var(--transition);
-}
-
-.category-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
 }
 
 .category-header {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    background: var(--primary-blue);
     color: white;
-    padding: 8px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 800;
+    padding: 4px 12px;
     font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    justify-content: space-between;
 }
 
-.category-icon {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) invert(1);
-}
-
-/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
-    flex: 1;
-}
-
-thead {
-    background: rgba(241, 242, 246, 0.5);
-    border-bottom: 2px solid var(--accent-gold);
 }
 
 th {
-    padding: 6px 10px;
-    font-size: 12px;
-    font-weight: 900;
+    background: #f8f9fa;
+    font-size: 11px;
+    padding: 4px;
+    border-bottom: 1px solid var(--primary-blue);
     color: var(--primary-blue);
-    text-align: center;
 }
 
 td {
+    font-size: 11px;
     padding: 3px 8px;
-    font-size: 10.5px;
-    font-weight: 700;
-    color: var(--text-dark);
+    border-bottom: 1px solid #eee;
     text-align: center;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-}
-
-tr:nth-child(even) {
-    background: rgba(0,0,0,0.01);
-}
-
-tr:last-child td {
-    border-bottom: none;
+    font-weight: 700;
 }
 
 .food-name {
@@ -251,132 +144,84 @@ tr:last-child td {
     font-weight: 800;
 }
 
-.calorie-badge {
-    background: var(--accent-gold);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 10px;
-    font-weight: 900;
+/* Subscriber Info (Back Page) */
+.subscriber-info {
+    border: 1.5px solid var(--primary-blue);
+    padding: 10px;
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 
-/* Footer Styles */
-.footer {
-    margin-top: 15px;
-    padding: 8px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 11px;
+.info-item {
+    font-size: 12px;
     font-weight: 800;
-    color: var(--text-muted);
-    border-top: 2px solid #eee;
 }
 
-.footer strong {
-    color: var(--primary-blue);
+.info-field {
+    border-bottom: 1px dotted #666;
+    height: 18px;
 }
 
-/* Search Bar (No Print) */
-.search-container {
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
-    position: relative;
-}
-
-.search-input {
-    width: 100%;
-    padding: 10px 40px 10px 15px;
-    border-radius: 20px;
-    border: 2px solid var(--primary-blue);
-    font-family: 'Cairo';
-    font-weight: 700;
-    outline: none;
-    transition: var(--transition);
-}
-
-.search-input:focus {
-    box-shadow: 0 0 15px rgba(30, 55, 153, 0.2);
-}
-
-/* Tracking Table Specifics (Back Page) */
+/* Tracking Table (Back Page) */
 .tracking-container {
-    grid-column: span 2;
-    grid-row: span 2;
-    border: 2px solid var(--primary-blue);
-}
-
-.tracking-header {
-    background: var(--accent-gold) !important;
-    color: var(--primary-blue-dark) !important;
+    border: 1.5px solid var(--primary-blue);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .tracking-table th, .tracking-table td {
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     font-size: 12px;
+    padding: 5px;
 }
 
-.month-marker {
-    background: rgba(116, 185, 255, 0.2);
+.tracking-table .marker {
+    background: #fff9c4;
     font-weight: 900;
 }
 
-.final-marker {
-    background: rgba(255, 118, 117, 0.2);
-    font-weight: 900;
-}
-
-/* Controls (No Print) */
-.controls {
+/* Legend (Back Page) */
+.legend-banner {
+    background: var(--accent-yellow);
+    padding: 5px;
+    margin-top: 10px;
     display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    z-index: 100;
+    justify-content: space-around;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--primary-blue);
 }
 
-.btn {
-    padding: 10px 25px;
+.footer {
+    text-align: center;
+    font-size: 10px;
+    margin-top: 5px;
+    color: #666;
+}
+
+/* No Print */
+.no-print {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.btn-print {
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
     border: none;
-    border-radius: 30px;
     cursor: pointer;
     font-family: 'Cairo';
     font-weight: 800;
-    color: white;
-    background: var(--primary-blue);
-    box-shadow: 0 4px 15px rgba(30, 55, 153, 0.3);
-    transition: var(--transition);
 }
 
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(30, 55, 153, 0.4);
+@media print {
+    body { padding: 0; }
+    .no-print { display: none; }
 }
-
-.btn-gold {
-    background: var(--accent-gold);
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-}
-
-.btn-gold:hover {
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.category-card {
-    animation: fadeInUp 0.5s ease forwards;
-}
-
-.category-card:nth-child(1) { animation-delay: 0.1s; }
-.category-card:nth-child(2) { animation-delay: 0.2s; }
-.category-card:nth-child(3) { animation-delay: 0.3s; }
-.category-card:nth-child(4) { animation-delay: 0.4s; }
-.category-card:nth-child(5) { animation-delay: 0.5s; }
-.category-card:nth-child(6) { animation-delay: 0.6s; }
-.category-card:nth-child(7) { animation-delay: 0.7s; }
-.category-card:nth-child(8) { animation-delay: 0.8s; }
