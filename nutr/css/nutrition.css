@@ -135,7 +135,7 @@ th {
 
 td {
     font-size: 12px;
-    padding: 4px 8px;
+    padding: 6px 8px;
     border-bottom: 1px solid #eee;
     text-align: center;
     font-weight: 700;
@@ -175,10 +175,14 @@ td {
     flex-direction: column;
 }
 
+.tracking-table {
+    height: 100%;
+}
+
 .tracking-table th, .tracking-table td {
     border: 1px solid #ccc;
-    font-size: 12px;
-    padding: 5px;
+    font-size: 13px;
+    padding: 12px 5px;
 }
 
 .tracking-table .marker {
