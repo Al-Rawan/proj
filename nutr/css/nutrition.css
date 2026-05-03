@@ -36,7 +36,7 @@ body {
     height: 297mm;
     background: white;
     border: 1px solid #000;
-    padding: 8mm; /* Reduced padding to fill more space */
+    padding: 6mm;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -47,7 +47,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Added gap to distribute content better */
+    gap: 3px;
 }
 
 /* Header */
@@ -57,8 +57,8 @@ body {
     align-items: center;
     background: var(--primary-blue);
     color: white;
-    padding: 8px 20px;
-    margin-bottom: 10px;
+    padding: 5px 20px;
+    margin-bottom: 3px;
 }
 
 .gym-brand {
@@ -68,17 +68,17 @@ body {
 }
 
 .logo-img {
-    height: 40px;
+    height: 35px;
     filter: brightness(0) invert(1);
 }
 
 .gym-name {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 900;
 }
 
 .course-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -88,9 +88,9 @@ body {
     justify-content: space-around;
     background: #fff;
     border: 1px solid var(--primary-blue);
-    padding: 5px;
-    margin-bottom: 10px;
-    font-size: 12px;
+    padding: 3px;
+    margin-bottom: 5px;
+    font-size: 11px;
     font-weight: 800;
     color: var(--primary-blue);
 }
@@ -99,7 +99,8 @@ body {
 .grid-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-rows: repeat(4, 1fr); /* Equal height rows */
+    gap: 8px;
     flex: 1;
 }
 
@@ -113,8 +114,8 @@ body {
 .category-header {
     background: var(--primary-blue);
     color: white;
-    padding: 4px 12px;
-    font-size: 14px;
+    padding: 2px 10px;
+    font-size: 12px;
     font-weight: 800;
     display: flex;
     justify-content: space-between;
@@ -127,18 +128,23 @@ table {
 
 th {
     background: #f8f9fa;
-    font-size: 12px;
-    padding: 5px;
+    font-size: 11px;
+    padding: 2px 5px;
     border-bottom: 1px solid var(--primary-blue);
     color: var(--primary-blue);
+    font-weight: 900;
+}
+
+.fill-table {
+    height: 100%;
 }
 
 td {
-    font-size: 12px;
-    padding: 6px 8px;
+    font-size: 11px;
+    padding: 3.5px 8px; /* Slightly more padding for better look */
     border-bottom: 1px solid #eee;
     text-align: center;
-    font-weight: 700;
+    font-weight: 800; /* Bolder */
 }
 
 .food-name {
@@ -150,8 +156,8 @@ td {
 /* Subscriber Info (Back Page) */
 .subscriber-info {
     border: 1.5px solid var(--primary-blue);
-    padding: 10px;
-    margin: 10px 0;
+    padding: 6px;
+    margin: 5px 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -164,7 +170,7 @@ td {
 
 .info-field {
     border-bottom: 1px dotted #666;
-    height: 18px;
+    height: 22px;
 }
 
 /* Tracking Table (Back Page) */
@@ -182,7 +188,8 @@ td {
 .tracking-table th, .tracking-table td {
     border: 1px solid #ccc;
     font-size: 13px;
-    padding: 12px 5px;
+    padding: 11px 5px; /* Taller for writing */
+    font-weight: 800;
 }
 
 .tracking-table .marker {
@@ -195,7 +202,7 @@ td {
     background: #f8f9fa;
     border: 1px solid #ccc;
     padding: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
     display: flex;
     justify-content: space-around;
     font-size: 11px;
