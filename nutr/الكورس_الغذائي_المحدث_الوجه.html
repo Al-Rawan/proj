@@ -2,200 +2,237 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الكورس الغذائي المحدث - الوجه</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root { --accent-color: #1e3799; --gold-color: #d4af37; --text-dark: #2d3436; }
-        @page { size: A4 portrait; margin: 0; }
-        html, body { margin: 0; padding: 0; font-family: 'Cairo', sans-serif; background: #dfe6e9; display: flex; justify-content: center; }
-        @media print { html, body { background: white; } .container { margin: 0 !important; border: 4px solid var(--accent-color) !important; box-shadow: none !important; } .print-btn { display: none !important; } }
-        .container { width: 210mm; height: 297mm; background: white; border: 4px solid var(--accent-color); padding: 5mm; display: flex; flex-direction: column; box-sizing: border-box; }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--gold-color); padding-bottom: 5px; margin-bottom: 10px; height: 50px; flex-shrink: 0; }
-        .logo-img { height: 40px; }
-        .gym-name { font-size: 22px; font-weight: 900; color: var(--accent-color); }
-        
-        .health-alert { background: #fff3cd; border: 2px solid #ffeeba; border-radius: 8px; padding: 8px; margin-bottom: 8px; text-align: center; font-weight: 800; color: #1e3799; font-size: 14px; flex-shrink: 0; display: flex; justify-content: space-around; align-items: center; }
-        
-        .tables-container { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); gap: 6px; flex: 1; overflow: hidden; }
-        .category-card { border: 1.5px solid #bdc3c7; border-radius: 8px; display: flex; flex-direction: column; background: #fff; overflow: hidden; }
-        .category-title { background: var(--accent-color); color: white; padding: 5px; text-align: center; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; }
-        .category-img { height: 16px; width: 16px; filter: brightness(0) invert(1); }
-        
-        table { width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; flex: 1; display: flex; flex-direction: column; }
-        thead { display: block; border-bottom: 2px solid var(--gold-color); background: #f8f9fa; }
-        tbody { display: flex; flex-direction: column; flex: 1; justify-content: space-around; }
-        tr { display: flex; width: 100%; border-bottom: 1px solid #f1f2f6; align-items: center; flex: 1; }
-        tr:last-child { border-bottom: none; }
-        th, td { padding: 2px 4px; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        th { color: var(--accent-color); font-weight: 900; height: 32px; font-size: 13px; }
-        td { font-weight: 700; color: var(--text-dark); line-height: 1.1; }
-        th:nth-child(1), td:nth-child(1) { justify-content: flex-start; text-align: right; padding-right: 12px; color: #1e3799; }
-        tr:nth-child(even) { background: #fdfdfd; }
-        
-        .print-btn { background: var(--gold-color); color: #1a1a1a; border: none; padding: 6px 20px; border-radius: 6px; cursor: pointer; font-size: 15px; font-weight: 900; font-family: 'Cairo'; }
-        .footer-note { text-align: center; font-size: 10px; font-weight: 900; padding: 3px; background: #f8f9fa; border-top: 2px solid #ccc; flex-shrink: 0; display: flex; justify-content: center; gap: 30px; }
-    </style>
+    <link rel="stylesheet" href="css/nutrition.css">
 </head>
 <body>
+
+    <div class="controls no-print">
+        <div class="search-container">
+            <input type="text" class="search-input" id="foodSearch" placeholder="ابحث عن مادة غذائية..." oninput="searchFood()">
+        </div>
+        <button class="btn btn-gold" onclick="window.print()">طباعة الكورس 🖨️</button>
+    </div>
+
     <div class="container">
         <div class="header">
-            <div style="display:flex; align-items:center; gap:8px;"><img src="LOGOz.png" alt="Logo" class="logo-img" onerror="this.style.display='none'"><div class="gym-name">قاعة الزاب الرياضية</div></div>
-            <div style="font-size: 18px; font-weight: 900; color: var(--accent-color);">🥗 الكورس الغذائي الصحي المحدث</div>
-            <button type="button" class="print-btn" onclick="window.print()">طباعة 🖨️</button>
+            <div class="gym-brand">
+                <img src="../LOGOz.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                <div class="gym-name">قاعة الزاب الرياضية</div>
+            </div>
+            <div class="course-title">🥗 الكورس الغذائي المحدث</div>
         </div>
         
-        <div class="health-alert">
-            <div>💡 تنبيه: هذا كورس صحي وليس نظام رجيم قاسي</div>
-            <div>💧 شرب الماء بكثرة</div>
-            <div>🥗 صحن زلاطة قبل الأكل</div>
+        <div class="alert-banner">
+            <div class="alert-item"><span>💡</span> تنبيه: هذا كورس صحي وليس نظام رجيم قاسي</div>
+            <div class="alert-item"><span>💧</span> شرب الماء بكثرة (3-4 لتر)</div>
+            <div class="alert-item"><span>🥗</span> صحن زلاطة متكامل قبل الأكل</div>
         </div>
         
-        <div class="tables-container">            <!-- Veggies -->
+        <div class="grid-container" id="foodGrid">
+            <!-- Veggies -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/veggies_icon.png" alt="Veggies" class="category-img" onerror="this.style.display='none'"> الخضروات</div>
+                <div class="category-header">
+                    <span>🥦 الخضروات</span>
+                    <span class="calorie-badge">قليلة السعرات</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>باذنجان</td><td style='width: 27%;'>حبة (200غ)</td><td style='width: 15%;'>50</td></tr>
-                        <tr><td style='width: 58%;'>باقلي خضراء / سبانخ</td><td style='width: 27%;'>كوب نيئ (30غ)</td><td style='width: 15%;'>5</td></tr>
-                        <tr><td style='width: 58%;'>بروكلي</td><td style='width: 27%;'>كوب (90غ)</td><td style='width: 15%;'>30</td></tr>
-                        <tr><td style='width: 58%;'>بصل</td><td style='width: 27%;'>حبة (110غ)</td><td style='width: 15%;'>45</td></tr>
-                        <tr><td style='width: 58%;'>جزر</td><td style='width: 27%;'>حبة (60غ)</td><td style='width: 15%;'>25</td></tr>
-                        <tr><td style='width: 58%;'>خس (روماني)</td><td style='width: 27%;'>كوب (36غ)</td><td style='width: 15%;'>5</td></tr>
-                        <tr><td style='width: 58%;'>خيار</td><td style='width: 27%;'>حبة (200غ)</td><td style='width: 15%;'>30</td></tr>
-                        <tr><td style='width: 58%;'>طماطم</td><td style='width: 27%;'>حبة (123غ)</td><td style='width: 15%;'>20</td></tr>
-                        <tr><td style='width: 58%;'>فلفل حلو</td><td style='width: 27%;'>حبة (120غ)</td><td style='width: 15%;'>30</td></tr>
-                        <tr><td style='width: 58%;'>كوسا / كوسة</td><td style='width: 27%;'>حبة (180غ)</td><td style='width: 15%;'>30</td></tr>
-                        <tr><td style='width: 58%;'>لهانة / ملفوف</td><td style='width: 27%;'>كوب مقطع (70غ)</td><td style='width: 15%;'>20</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">باذنجان</td><td>حبة (200غ)</td><td>50</td></tr>
+                        <tr><td class="food-name">باقلي خضراء / سبانخ</td><td>كوب (30غ)</td><td>5</td></tr>
+                        <tr><td class="food-name">بروكلي</td><td>كوب (90غ)</td><td>30</td></tr>
+                        <tr><td class="food-name">بصل</td><td>حبة (110غ)</td><td>45</td></tr>
+                        <tr><td class="food-name">جزر</td><td>حبة (60غ)</td><td>25</td></tr>
+                        <tr><td class="food-name">خس (روماني)</td><td>كوب (36غ)</td><td>5</td></tr>
+                        <tr><td class="food-name">خيار</td><td>حبة (200غ)</td><td>30</td></tr>
+                        <tr><td class="food-name">طماطم</td><td>حبة (123غ)</td><td>20</td></tr>
+                        <tr><td class="food-name">فلفل حلو</td><td>حبة (120غ)</td><td>30</td></tr>
+                        <tr><td class="food-name">كوسا</td><td>حبة (180غ)</td><td>30</td></tr>
+                        <tr><td class="food-name">لهانة / ملفوف</td><td>كوب (70غ)</td><td>20</td></tr>
                     </tbody>
                 </table>
             </div>
+
             <!-- Fruits -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/fruits_icon.png" alt="Fruits" class="category-img" onerror="this.style.display='none'"> الفواكه</div>
+                <div class="category-header">
+                    <span>🍎 الفواكه</span>
+                    <span class="calorie-badge">فيتامينات وألياف</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>برتقال</td><td style='width: 27%;'>حبة (130غ)</td><td style='width: 15%;'>60</td></tr>
-                        <tr><td style='width: 58%;'>بطيخ أحمر (رقي)</td><td style='width: 27%;'>شريحة (150غ)</td><td style='width: 15%;'>45</td></tr>
-                        <tr><td style='width: 58%;'>تفاح (مع قشر)</td><td style='width: 27%;'>حبة (180غ)</td><td style='width: 15%;'>95</td></tr>
-                        <tr><td style='width: 58%;'>تين طازج</td><td style='width: 27%;'>حبتان (100غ)</td><td style='width: 15%;'>75</td></tr>
-                        <tr><td style='width: 58%;'>خوخ</td><td style='width: 27%;'>حبة (150غ)</td><td style='width: 15%;'>60</td></tr>
-                        <tr><td style='width: 58%;'>رمّان (حبوب)</td><td style='width: 27%;'>نصف حبة (140غ)</td><td style='width: 15%;'>115</td></tr>
-                        <tr><td style='width: 58%;'>عنب</td><td style='width: 27%;'>كوب (92غ)</td><td style='width: 15%;'>65</td></tr>
-                        <tr><td style='width: 58%;'>فراولة</td><td style='width: 27%;'>كوب (150غ)</td><td style='width: 15%;'>50</td></tr>
-                        <tr><td style='width: 58%;'>كمثرى/عرموط</td><td style='width: 27%;'>حبة (178غ)</td><td style='width: 15%;'>100</td></tr>
-                        <tr><td style='width: 58%;'>كيوي</td><td style='width: 27%;'>حبة (75غ)</td><td style='width: 15%;'>45</td></tr>
-                        <tr><td style='width: 58%;'>ليمون</td><td style='width: 27%;'>حبة (60غ)</td><td style='width: 15%;'>15</td></tr>
-                        <tr><td style='width: 58%;'>مانجو</td><td style='width: 27%;'>نصف حبة (165غ)</td><td style='width: 15%;'>100</td></tr>
-                        <tr><td style='width: 58%;'>موز</td><td style='width: 27%;'>حبة (120غ)</td><td style='width: 15%;'>105</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">تفاح (مع قشر)</td><td>حبة (180غ)</td><td>95</td></tr>
+                        <tr><td class="food-name">موز</td><td>حبة (120غ)</td><td>105</td></tr>
+                        <tr><td class="food-name">برتقال</td><td>حبة (130غ)</td><td>60</td></tr>
+                        <tr><td class="food-name">بطيخ أحمر (رقي)</td><td>شريحة (150غ)</td><td>45</td></tr>
+                        <tr><td class="food-name">تين طازج</td><td>حبتان (100غ)</td><td>75</td></tr>
+                        <tr><td class="food-name">خوخ</td><td>حبة (150غ)</td><td>60</td></tr>
+                        <tr><td class="food-name">رمّان (حبوب)</td><td>نصف حبة (140)</td><td>115</td></tr>
+                        <tr><td class="food-name">فراولة</td><td>كوب (150غ)</td><td>50</td></tr>
+                        <tr><td class="food-name">كيوي</td><td>حبة (75غ)</td><td>45</td></tr>
+                        <tr><td class="food-name">مانجو</td><td>نصف حبة (165)</td><td>100</td></tr>
+                        <tr><td class="food-name">عنب</td><td>كوب (92غ)</td><td>65</td></tr>
                     </tbody>
                 </table>
             </div>
-            <!-- Meat -->
+
+            <!-- Meat & Protein -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/meat_icon.png" alt="Meat" class="category-img" onerror="this.style.display='none'"> اللحوم والبروتين</div>
+                <div class="category-header">
+                    <span>🍗 اللحوم والبروتين</span>
+                    <span class="calorie-badge">بناء عضلي</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>بياض بيضة</td><td style='width: 27%;'>من بيضة (33غ)</td><td style='width: 15%;'>15</td></tr>
-                        <tr><td style='width: 58%;'>بيضة مسلوقة كاملة</td><td style='width: 27%;'>1 حبة (50غ)</td><td style='width: 15%;'>70</td></tr>
-                        <tr><td style='width: 58%;'>تونة معلّبة بالماء</td><td style='width: 27%;'>نصف علبة (60غ)</td><td style='width: 15%;'>70</td></tr>
-                        <tr><td style='width: 58%;'>سمك مشوي (مثل الشبوط)</td><td style='width: 27%;'>قطعة (100غ)</td><td style='width: 15%;'>130</td></tr>
-                        <tr><td style='width: 58%;'>صدر دجاج مشوي</td><td style='width: 27%;'>حجم اليد (100غ)</td><td style='width: 15%;'>165</td></tr>
-                        <tr><td style='width: 58%;'>صفار بيضة</td><td style='width: 27%;'>من بيضة (17غ)</td><td style='width: 15%;'>55</td></tr>
-                        <tr><td style='width: 58%;'>فخذ دجاج مشوي</td><td style='width: 27%;'>حجم اليد (100غ)</td><td style='width: 15%;'>210</td></tr>
-                        <tr><td style='width: 58%;'>كباب / شيش كباب</td><td style='width: 27%;'>شيش (100غ)</td><td style='width: 15%;'>250</td></tr>
-                        <tr><td style='width: 58%;'>لحم بقر خالي الدهن (95%)</td><td style='width: 27%;'>حجم اليد (100غ مطبوخ)</td><td style='width: 15%;'>220</td></tr>
-                        <tr><td style='width: 58%;'>لحم بقر عادي (80/20)</td><td style='width: 27%;'>حجم اليد (100غ مطبوخ)</td><td style='width: 15%;'>270</td></tr>
-                        <tr><td style='width: 58%;'>همبركر قطعة لحم</td><td style='width: 27%;'>شريحة مشوية (100غ)</td><td style='width: 15%;'>270</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">صدر دجاج مشوي</td><td>اليد (100غ)</td><td>165</td></tr>
+                        <tr><td class="food-name">سمك مشوي</td><td>قطعة (100غ)</td><td>130</td></tr>
+                        <tr><td class="food-name">لحم بقر خالي دهن</td><td>اليد (100غ)</td><td>220</td></tr>
+                        <tr><td class="food-name">بيضة مسلوقة كاملة</td><td>1 حبة (50غ)</td><td>70</td></tr>
+                        <tr><td class="food-name">بياض بيضة</td><td>1 حبة (33غ)</td><td>15</td></tr>
+                        <tr><td class="food-name">تونة بالماء</td><td>نصف علبة</td><td>70</td></tr>
+                        <tr><td class="food-name">فخذ دجاج مشوي</td><td>اليد (100غ)</td><td>210</td></tr>
+                        <tr><td class="food-name">كباب / شيش</td><td>شيش (100غ)</td><td>250</td></tr>
+                        <tr><td class="food-name">همبركر لحم مشوي</td><td>قطعة (100غ)</td><td>270</td></tr>
                     </tbody>
                 </table>
             </div>
+
             <!-- Carbs -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/carbs_icon.png" alt="Carbs" class="category-img" onerror="this.style.display='none'"> مصادر النشويات</div>
+                <div class="category-header">
+                    <span>🍚 مصادر النشويات</span>
+                    <span class="calorie-badge">طاقة مستدامة</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>بطاطا مسلوقة</td><td style='width: 27%;'>حبة (150غ)</td><td style='width: 15%;'>130</td></tr>
-                        <tr><td style='width: 58%;'>بطاطا مقلية</td><td style='width: 27%;'>حصة (100غ)</td><td style='width: 15%;'>310</td></tr>
-                        <tr><td style='width: 58%;'>خبز أسمر (قمح كامل)</td><td style='width: 27%;'>نصف رغيف (70غ)</td><td style='width: 15%;'>175</td></tr>
-                        <tr><td style='width: 58%;'>خبز توست أبيض</td><td style='width: 27%;'>شريحة (25غ)</td><td style='width: 15%;'>65</td></tr>
-                        <tr><td style='width: 58%;'>خبز عراقي أبيض (تنور)</td><td style='width: 27%;'>نصف رغيف (70غ)</td><td style='width: 15%;'>190</td></tr>
-                        <tr><td style='width: 58%;'>خبز لبناني بيتا</td><td style='width: 27%;'>رغيف (60غ)</td><td style='width: 15%;'>165</td></tr>
-                        <tr><td style='width: 58%;'>ذرة مطبوخة</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>15</td></tr>
-                        <tr><td style='width: 58%;'>رز أبيض / بسمتي مطبوخ</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>20</td></tr>
-                        <tr><td style='width: 58%;'>صمون حجري</td><td style='width: 27%;'>قطعة (100غ)</td><td style='width: 15%;'>275</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">رز بسمتي مطبوخ</td><td>م.أ (15غ)</td><td>20</td></tr>
+                        <tr><td class="food-name">بطاطا مسلوقة</td><td>حبة (150غ)</td><td>130</td></tr>
+                        <tr><td class="food-name">خبز أسمر</td><td>نصف رغيف</td><td>175</td></tr>
+                        <tr><td class="food-name">خبز عراقي (تنور)</td><td>نصف رغيف</td><td>190</td></tr>
+                        <tr><td class="food-name">صمون حجري</td><td>قطعة (100غ)</td><td>275</td></tr>
+                        <tr><td class="food-name">خبز توست أبيض</td><td>شريحة (25غ)</td><td>65</td></tr>
+                        <tr><td class="food-name">خبز لبناني بيتا</td><td>رغيف (60غ)</td><td>165</td></tr>
+                        <tr><td class="food-name">ذرة مطبوخة</td><td>م.أ (15غ)</td><td>15</td></tr>
+                        <tr><td class="food-name">بطاطا مقلية</td><td>حصة (100غ)</td><td>310</td></tr>
                     </tbody>
                 </table>
             </div>
-            <!-- Oils -->
+
+            <!-- Oils & Fats -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/fats_and_oils.png" alt="Oils" class="category-img" onerror="this.style.display='none'"> الدهون والزيوت</div>
+                <div class="category-header">
+                    <span>🥑 الدهون والزيوت</span>
+                    <span class="calorie-badge">دهون صحية</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>زبدة</td><td style='width: 27%;'>م.أ (14غ)</td><td style='width: 15%;'>100</td></tr>
-                        <tr><td style='width: 58%;'>زيت جوز هند</td><td style='width: 27%;'>م.أ (14مل)</td><td style='width: 15%;'>125</td></tr>
-                        <tr><td style='width: 58%;'>زيت زيتون</td><td style='width: 27%;'>م.أ (14مل)</td><td style='width: 15%;'>125</td></tr>
-                        <tr><td style='width: 58%;'>زيت نباتي (صويا/ذرة)</td><td style='width: 27%;'>م.أ (14مل)</td><td style='width: 15%;'>125</td></tr>
-                        <tr><td style='width: 58%;'>سمن حيواني / حر</td><td style='width: 27%;'>م.أ (14غ)</td><td style='width: 15%;'>125</td></tr>
-                        <tr><td style='width: 58%;'>سمن نباتي</td><td style='width: 27%;'>م.أ (13غ)</td><td style='width: 15%;'>115</td></tr>
-                        <tr><td style='width: 58%;'>طحينة / راشي</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>90</td></tr>
-                        <tr><td style='width: 58%;'>مايونيز كامل الدسم</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>100</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">زيت زيتون</td><td>م.أ (14مل)</td><td>125</td></tr>
+                        <tr><td class="food-name">زبدة</td><td>م.أ (14غ)</td><td>100</td></tr>
+                        <tr><td class="food-name">زيت جوز هند</td><td>م.أ (14مل)</td><td>125</td></tr>
+                        <tr><td class="food-name">سمن حيواني / حر</td><td>م.أ (14غ)</td><td>125</td></tr>
+                        <tr><td class="food-name">طحينة / راشي</td><td>م.أ (15غ)</td><td>90</td></tr>
+                        <tr><td class="food-name">مايونيز كامل الدسم</td><td>م.أ (15غ)</td><td>100</td></tr>
+                        <tr><td class="food-name">سمن نباتي</td><td>م.أ (13غ)</td><td>115</td></tr>
                     </tbody>
                 </table>
             </div>
+
             <!-- Legumes -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/legumes_meat_icon.png" alt="Legumes" class="category-img" onerror="this.style.display='none'"> البقوليات (البروتين)</div>
+                <div class="category-header">
+                    <span>🫘 البقوليات</span>
+                    <span class="calorie-badge">بروتين نباتي</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>حمص مطبوخ (بدون طحينة)</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>25</td></tr>
-                        <tr><td style='width: 58%;'>عدس أحمر مطبوخ</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>15</td></tr>
-                        <tr><td style='width: 58%;'>فاصولياء بيضاء مطبوخة</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>20</td></tr>
-                        <tr><td style='width: 58%;'>فول / باقلاء مطبوخ</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>15</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">حمص مطبوخ</td><td>م.أ (15غ)</td><td>25</td></tr>
+                        <tr><td class="food-name">عدس أحمر مطبوخ</td><td>م.أ (15غ)</td><td>15</td></tr>
+                        <tr><td class="food-name">فاصولياء بيضاء</td><td>م.أ (15غ)</td><td>20</td></tr>
+                        <tr><td class="food-name">فول / باقلاء مطبوخ</td><td>م.أ (15غ)</td><td>15</td></tr>
                     </tbody>
                 </table>
             </div>
+
             <!-- Sugars -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/sugars_icon.png" alt="Sugars" class="category-img" onerror="this.style.display='none'"> مصادر السكريات</div>
+                <div class="category-header">
+                    <span>🍯 مصادر السكريات</span>
+                    <span class="calorie-badge">انتبه للكمية</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>تمر رطب</td><td style='width: 27%;'>1 حبة (15غ)</td><td style='width: 15%;'>40</td></tr>
-                        <tr><td style='width: 58%;'>تمر مجهول</td><td style='width: 27%;'>1 حبة (24غ)</td><td style='width: 15%;'>65</td></tr>
-                        <tr><td style='width: 58%;'>دبس سكر</td><td style='width: 27%;'>م.أ (20غ)</td><td style='width: 15%;'>60</td></tr>
-                        <tr><td style='width: 58%;'>زبيب</td><td style='width: 27%;'>م.أ (~18 حبة)</td><td style='width: 15%;'>40</td></tr>
-                        <tr><td style='width: 58%;'>سكر أبيض</td><td style='width: 27%;'>م.ص (4غ)</td><td style='width: 15%;'>15</td></tr>
-                        <tr><td style='width: 58%;'>سكر ستيفيا</td><td style='width: 27%;'>كيس (1غ)</td><td style='width: 15%;'>5</td></tr>
-                        <tr><td style='width: 58%;'>عسل طبيعي</td><td style='width: 27%;'>م.ص (7غ)</td><td style='width: 15%;'>20</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">تمر رطب</td><td>1 حبة (15غ)</td><td>40</td></tr>
+                        <tr><td class="food-name">عسل طبيعي</td><td>م.ص (7غ)</td><td>20</td></tr>
+                        <tr><td class="food-name">سكر ستيفيا</td><td>كيس (1غ)</td><td>5</td></tr>
+                        <tr><td class="food-name">زبيب</td><td>م.أ (~18 حبة)</td><td>40</td></tr>
+                        <tr><td class="food-name">دبس سكر</td><td>م.أ (20غ)</td><td>60</td></tr>
+                        <tr><td class="food-name">سكر أبيض</td><td>م.ص (4غ)</td><td>15</td></tr>
                     </tbody>
                 </table>
             </div>
+
             <!-- Pastries -->
             <div class="category-card">
-                <div class="category-title" style="font-size: 13px;"><img src="icons/pastries_icon.png" alt="Pastries" class="category-img" onerror="this.style.display='none'"> المعجنات</div>
+                <div class="category-header">
+                    <span>🥐 المعجنات والحلويات</span>
+                    <span class="calorie-badge" style="background:#e74c3c">عالية السعرات</span>
+                </div>
                 <table>
-                    <thead><tr><th style="width: 58%;">المادة</th><th style="width: 27%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td style='width: 58%;'>إندومي</td><td style='width: 27%;'>كيس (85غ)</td><td style='width: 15%;'>390</td></tr>
-                        <tr><td style='width: 58%;'>بقلاوة</td><td style='width: 27%;'>قطعة (50غ)</td><td style='width: 15%;'>215</td></tr>
-                        <tr><td style='width: 58%;'>زلابيا</td><td style='width: 27%;'>قطعة (50غ)</td><td style='width: 15%;'>170</td></tr>
-                        <tr><td style='width: 58%;'>زنود الست</td><td style='width: 27%;'>قطعة (50غ)</td><td style='width: 15%;'>180</td></tr>
-                        <tr><td style='width: 58%;'>طاطلي</td><td style='width: 27%;'>قطعة (50غ)</td><td style='width: 15%;'>160</td></tr>
-                        <tr><td style='width: 58%;'>معكرونة مطبوخة</td><td style='width: 27%;'>م.أ (15غ)</td><td style='width: 15%;'>25</td></tr>
+                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
+                    <tbody class="food-list">
+                        <tr><td class="food-name">إندومي</td><td>كيس (85غ)</td><td>390</td></tr>
+                        <tr><td class="food-name">بقلاوة</td><td>قطعة (50غ)</td><td>215</td></tr>
+                        <tr><td class="food-name">زلابيا</td><td>قطعة (50غ)</td><td>170</td></tr>
+                        <tr><td class="food-name">زنود الست</td><td>قطعة (50غ)</td><td>180</td></tr>
+                        <tr><td class="food-name">معكرونة مطبوخة</td><td>م.أ (15غ)</td><td>25</td></tr>
                     </tbody>
                 </table>
             </div>
-</div>
+        </div>
         
-        <div class="footer-note">
-            <span>المصادر: USDA (وزارة الزراعة الأمريكية) | Codex (هيئة دستور الأغذية)</span>
+        <div class="footer">
+            <span>المصادر المعتمدة: <strong>USDA</strong> (وزارة الزراعة الأمريكية) | <strong>Codex</strong> (هيئة دستور الأغذية العالمية)</span>
         </div>
     </div>
+
+    <script>
+        function searchFood() {
+            const input = document.getElementById('foodSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('.food-list tr');
+            const cards = document.querySelectorAll('.category-card');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            // Hide empty cards
+            cards.forEach(card => {
+                const visibleRows = card.querySelectorAll('.food-list tr[style="display: "]');
+                const allRows = card.querySelectorAll('.food-list tr');
+                
+                let hasVisible = false;
+                allRows.forEach(r => { if(r.style.display !== "none") hasVisible = true; });
+
+                if (hasVisible) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
