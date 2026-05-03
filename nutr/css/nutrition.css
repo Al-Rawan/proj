@@ -33,8 +33,9 @@ body {
 .a4-page {
     width: 210mm;
     height: 297mm;
-    background: var(--accent-yellow); /* Thick Yellow Border */
-    padding: 6mm; /* Border thickness */
+    background: white;
+    border: 1px solid #000; /* Simple Black Border */
+    padding: 10mm;
     display: flex;
     flex-direction: column;
 }
@@ -179,13 +180,14 @@ td {
 }
 
 .tracking-table .marker {
-    background: #fff9c4;
+    background: #f0f0f0; /* Light Grey instead of Yellow */
     font-weight: 900;
 }
 
 /* Legend (Back Page) */
 .legend-banner {
-    background: var(--accent-yellow);
+    background: #f8f9fa;
+    border: 1px solid #ccc;
     padding: 5px;
     margin-top: 10px;
     display: flex;
