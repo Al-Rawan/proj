@@ -2,149 +2,138 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الكورس الغذائي المحدث - الظهر</title>
+    <title>الكورس الغذائي - الظهر 2</title>
     <link rel="stylesheet" href="css/nutrition.css">
 </head>
 <body>
 
-    <div class="controls no-print">
-        <button class="btn btn-gold" onclick="window.print()">طباعة الكورس 🖨️</button>
+    <div class="no-print">
+        <button class="btn-print" onclick="window.print()">طباعة الظهر 🖨️</button>
     </div>
 
-    <div class="container">
-        <div class="header">
-            <div class="gym-brand">
-                <img src="../LOGOz.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-                <div class="gym-name">قاعة الزاب الرياضية</div>
-            </div>
-            <div class="course-title">🗓️ مراجعة الكورس والقاعة كل يوم سبت</div>
-        </div>
-        
-        <div class="grid-container">
-            <!-- Hot Drinks -->
-            <div class="category-card">
-                <div class="category-header">
-                    <span>☕ المشروبات الحارة</span>
-                    <span class="calorie-badge">صفر سعرات (بدون سكر)</span>
+    <div class="a4-page">
+        <div class="inner-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="gym-brand">
+                    <img src="../LOGOz.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+                    <span class="gym-name">قاعة الزاب الرياضية</span>
                 </div>
-                <table>
-                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td class="food-name">شاي سادة</td><td>كوب (180مل)</td><td>5</td></tr>
-                        <tr><td class="food-name">قهوة سادة</td><td>كوب (180مل)</td><td>5</td></tr>
-                        <tr><td class="food-name">قهوة + ستيفيا</td><td>كوب (180مل)</td><td>5</td></tr>
-                        <tr><td class="food-name">نسكافيه جاف</td><td>م.ص (2غ)</td><td>5</td></tr>
-                        <tr><td class="food-name">كاكاو خالي السكر</td><td>م.أ (5غ)</td><td>10</td></tr>
-                        <tr><td class="food-name">حليب بودرة (Nido)</td><td>م.أ (12غ)</td><td>60</td></tr>
-                    </tbody>
-                </table>
+                <div class="course-title">الكورس الغذائي - المتابعة</div>
             </div>
 
-            <!-- Cold Drinks -->
-            <div class="category-card">
-                <div class="category-header">
-                    <span>🥤 المشروبات الباردة</span>
-                    <span class="calorie-badge">انتبه للسكريات</span>
+            <!-- 4 Categories Grid -->
+            <div class="grid-container" style="grid-template-rows: auto auto; flex: 0 0 auto;">
+                <!-- 1 -->
+                <div class="category-card">
+                    <div class="category-header"><span>🥛 مصادر الألبان</span></div>
+                    <table>
+                        <thead><tr><th>المادة</th><th>الكمية</th><th>سعرة</th></tr></thead>
+                        <tbody>
+                            <tr><td class="food-name">جبن شيدر</td><td>م.أ مبشور (7غ)</td><td>30</td></tr>
+                            <tr><td class="food-name">جبن كيري / معالج</td><td>قطعة (15غ)</td><td>45</td></tr>
+                            <tr><td class="food-name">حليب خالي الدسم</td><td>كوب (240مل)</td><td>80</td></tr>
+                            <tr><td class="food-name">حليب خفيف الدسم (2%)</td><td>كوب (240مل)</td><td>120</td></tr>
+                            <tr><td class="food-name">حليب كامل الدسم</td><td>كوب (240مل)</td><td>145</td></tr>
+                        </tbody>
+                    </table>
                 </div>
-                <table>
-                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td class="food-name">ماء</td><td>أي كمية</td><td>0</td></tr>
-                        <tr><td class="food-name">عصير برتقال طازج</td><td>كوب (240مل)</td><td>110</td></tr>
-                        <tr><td class="food-name">عصير مانجو طازج</td><td>كوب (240مل)</td><td>150</td></tr>
-                        <tr><td class="food-name">عصير صناعي معبأ</td><td>كوب (240مل)</td><td>115</td></tr>
-                        <tr><td class="food-name">بيبسي / كولا</td><td>علبة (355مل)</td><td>150</td></tr>
-                        <tr><td class="food-name">ريد بول</td><td>علبة (250مل)</td><td>110</td></tr>
-                    </tbody>
-                </table>
+
+                <!-- 2 -->
+                <div class="category-card">
+                    <div class="category-header"><span>🥜 المكسرات غير المحمصة</span></div>
+                    <table>
+                        <thead><tr><th>المادة</th><th>الكمية</th><th>سعرة</th></tr></thead>
+                        <tbody>
+                            <tr><td class="food-name">جوز جمل</td><td>3 أنصاف (7.5غ)</td><td>50</td></tr>
+                            <tr><td class="food-name">حب شمس مقشر</td><td>حفنة صغيرة (8غ)</td><td>45</td></tr>
+                            <tr><td class="food-name">سمسم</td><td>م.أ (9غ)</td><td>50</td></tr>
+                            <tr><td class="food-name">فستق حلبي</td><td>12 حبة (9غ)</td><td>50</td></tr>
+                            <tr><td class="food-name">فول سوداني</td><td>14 حبة (9غ)</td><td>50</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 3 -->
+                <div class="category-card">
+                    <div class="category-header"><span>🥤 المشروبات الباردة</span></div>
+                    <table>
+                        <thead><tr><th>المادة</th><th>الكمية</th><th>سعرة</th></tr></thead>
+                        <tbody>
+                            <tr><td class="food-name">بيبسي / كولا</td><td>علبة (355مل)</td><td>150</td></tr>
+                            <tr><td class="food-name">ريد بول</td><td>علبة (250مل)</td><td>110</td></tr>
+                            <tr><td class="food-name">عصير برتقال طازج</td><td>كوب (240مل)</td><td>110</td></tr>
+                            <tr><td class="food-name">عصير صناعي معبأ</td><td>كوب (240مل)</td><td>115</td></tr>
+                            <tr><td class="food-name">عصير مانجو طازج</td><td>كوب (240مل)</td><td>130</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 4 -->
+                <div class="category-card">
+                    <div class="category-header"><span>☕ المشروبات الحارة</span></div>
+                    <table>
+                        <thead><tr><th>المادة</th><th>الكمية</th><th>سعرة</th></tr></thead>
+                        <tbody>
+                            <tr><td class="food-name">حليب بودرة (Nido)</td><td>م.أ (12غ)</td><td>60</td></tr>
+                            <tr><td class="food-name">شاي سادة</td><td>كوب (180مل)</td><td>5</td></tr>
+                            <tr><td class="food-name">قهوة + ستيفيا</td><td>كوب (180مل)</td><td>5</td></tr>
+                            <tr><td class="food-name">قهوة سادة</td><td>كوب (180مل)</td><td>5</td></tr>
+                            <tr><td class="food-name">كاكاو خالي السكر</td><td>م.أ (5غ)</td><td>10</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- Dairy -->
-            <div class="category-card">
-                <div class="category-header">
-                    <span>🥛 مصادر الألبان</span>
-                    <span class="calorie-badge">كالسيوم وبروتين</span>
-                </div>
-                <table>
-                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td class="food-name">حليب خالي الدسم</td><td>كوب (240مل)</td><td>80</td></tr>
-                        <tr><td class="food-name">حليب كامل الدسم</td><td>كوب (240مل)</td><td>145</td></tr>
-                        <tr><td class="food-name">لبن زبادي</td><td>م.أ (15غ)</td><td>10</td></tr>
-                        <tr><td class="food-name">زبادي يوناني</td><td>م.أ (15غ)</td><td>15</td></tr>
-                        <tr><td class="food-name">جبن كيري / معالج</td><td>قطعة (15غ)</td><td>45</td></tr>
-                        <tr><td class="food-name">قيمر / كريمة</td><td>م.أ (15غ)</td><td>50</td></tr>
-                        <tr><td class="food-name">جبن شيدر</td><td>م.أ (7غ)</td><td>30</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Nuts -->
-            <div class="category-card">
-                <div class="category-header">
-                    <span>🥜 المكسرات (نيئة)</span>
-                    <span class="calorie-badge">دهون ذكية</span>
-                </div>
-                <table>
-                    <thead><tr><th style="width: 55%;">المادة</th><th style="width: 30%;">الكمية</th><th style="width: 15%;">سعرة</th></tr></thead>
-                    <tbody>
-                        <tr><td class="food-name">لوز</td><td>6-7 حبات</td><td>45</td></tr>
-                        <tr><td class="food-name">جوز جمل</td><td>3 أنصاف</td><td>50</td></tr>
-                        <tr><td class="food-name">كاجو</td><td>7-8 حبات</td><td>55</td></tr>
-                        <tr><td class="food-name">فستق حلبي</td><td>12 حبة</td><td>50</td></tr>
-                        <tr><td class="food-name">فول سوداني</td><td>14 حبة</td><td>50</td></tr>
-                        <tr><td class="food-name">حب شمس مقشّر</td><td>حفنة (8غ)</td><td>45</td></tr>
-                        <tr><td class="food-name">سمسم</td><td>م.أ (9غ)</td><td>50</td></tr>
-                    </tbody>
-                </table>
+            <!-- Subscriber Info -->
+            <div class="category-header" style="margin-top: 10px; border-radius: 4px 4px 0 0;"><span>📋 معلومات المشترك</span></div>
+            <div class="subscriber-info">
+                <div class="info-item">الاسم: <div class="info-field"></div></div>
+                <div class="info-item">الوزن الحالي: <div class="info-field"></div></div>
+                <div class="info-item">الوزن المطلوب: <div class="info-field"></div></div>
+                <div class="info-item">تاريخ البدء: <div class="info-field"></div></div>
             </div>
 
             <!-- Tracking Table -->
-            <div class="category-card tracking-container">
-                <div class="category-header tracking-header">
-                    <span>🗓️ جدول المتابعة الدورية (12 أسبوع)</span>
-                    <span>تطور الوزن والقياسات</span>
-                </div>
+            <div class="category-header" style="border-radius: 4px 4px 0 0;"><span>📅 جدول المتابعة الدورية (12 أسبوعاً)</span></div>
+            <div class="tracking-container">
                 <table class="tracking-table">
                     <thead>
                         <tr>
-                            <th style="width: 40%;">الفترة الزمنية</th>
-                            <th style="width: 30%;">السعرات المستهدفة</th>
-                            <th style="width: 30%;">وزن الجسم الحالي</th>
+                            <th style="width: 25%;">الأسبوع</th>
+                            <th style="width: 25%;">وزن الجسم (كغ)</th>
+                            <th style="width: 50%;">السعرات اليومية</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr><td>الأسبوع 1</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 2</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 3</td><td></td><td></td></tr>
-                        <tr class="month-marker"><td>الأسبوع 4 (نهاية الشهر 1)</td><td></td><td></td></tr>
+                        <tr class="marker"><td>الأسبوع 4 ⭐ الشهر الأول</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 5</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 6</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 7</td><td></td><td></td></tr>
-                        <tr class="month-marker"><td>الأسبوع 8 (نهاية الشهر 2)</td><td></td><td></td></tr>
+                        <tr class="marker"><td>الأسبوع 8 ⭐ الشهر الثاني</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 9</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 10</td><td></td><td></td></tr>
                         <tr><td>الأسبوع 11</td><td></td><td></td></tr>
-                        <tr class="final-marker"><td>الأسبوع 12 (النتيجة النهائية)</td><td></td><td></td></tr>
+                        <tr class="marker"><td>الأسبوع 12 ⭐ الشهر الثالث</td><td></td><td></td></tr>
                     </tbody>
                 </table>
             </div>
-        </div>
 
-        <div class="alert-banner info-banner">
-            <div class="info-grid">
-                <div class="alert-item">📏 م.أ = ملعقة أكل كبيرة</div>
-                <div class="alert-item">📏 م.ص = ملعقة شاي صغيرة</div>
-                <div class="alert-item">📏 كوب = 240 مل</div>
-                <div class="alert-item">📏 حجم اليد = ~100 غرام</div>
-                <div class="alert-item">📏 حبة = وحدة مفردة</div>
-                <div class="alert-item highlight-red">⚠️ المراجعة كل سبت</div>
+            <!-- Legend -->
+            <div class="legend-banner">
+                <span>م.أ = ملعقة أكل</span>
+                <span>م.ص = ملعقة صغيرة</span>
+                <span>كوب = 240 مل</span>
+                <span>حجم اليد = ~100غ</span>
+                <span>📌 المراجعة كل سبت</span>
             </div>
-        </div>
-        
-        <div class="footer">
-            <span>المصادر المعتمدة: <strong>USDA</strong> (وزارة الزراعة الأمريكية) | <strong>Codex</strong> (هيئة دستور الأغذية العالمية)</span>
+
+            <div class="footer">
+                <span>USDA 2025 | الظهر 2</span>
+            </div>
         </div>
     </div>
 
